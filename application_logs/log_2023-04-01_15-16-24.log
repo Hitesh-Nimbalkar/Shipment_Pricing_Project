@@ -1,0 +1,2 @@
+[2023-04-01 15:16:25,316] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='C:\\Users\\Hitesh\\Documents\\Shipment_Pricing_Project\\shipment\\artifact')
+[2023-04-01 15:16:25,316] root - ERROR - 'Pipeline' object has no attribute 'run_pipeline'
