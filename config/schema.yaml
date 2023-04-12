@@ -1,0 +1,40 @@
+FileName: "clean_df.csv"
+NumberOfColumns: 12
+ColumnNames:
+  Country      :          category
+  Shipment Mode :         category
+  Brand         :         category
+  Dosage Form   :         category
+  Line Item Quantity:        float64
+  Pack_Price         :       float64
+  First Line Designation: category
+  Weight (Kilograms)      :  float64
+  Freight Cost (USD)    :      float64
+  Unit of Measure (Per Pack) : int64
+  Unit Price :                float64
+  Line Item Insurance (USD): float64
+
+
+
+
+Onehot_column:
+  - Shipment Mode
+  - Country
+  - Brand
+  - Dosage Form
+
+
+
+Transformation_columns:
+  - Unit of Measure (Per Pack) 
+  - Line Item Quantity 
+  - Line Item Value
+  - pack price 
+  - Unit Price   
+  - Weight (Kilograms) 
+  - Freight Cost (USD) 
+  - Line Item Insurance (USD)  
+
+
+Traget_Column:
+  - Freight Cost (USD)

@@ -1,0 +1,26 @@
+[2023-04-12 15:18:31,080] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='C:\\Users\\Hitesh\\Documents\\Shipment_Pricing_Project\\shipment\\artifact')
+[2023-04-12 15:18:31,080] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/sumeet0701/Supply-Chain-Shipment-Pricing-predictions/main/notebook/dataset/Clean_df.csv', raw_data_dir='C:\\Users\\Hitesh\\Documents\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-04-12-15-18-30\\raw_data', ingested_train_dir='C:\\Users\\Hitesh\\Documents\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-04-12-15-18-30\\ingested_data\\train', ingested_test_dir='C:\\Users\\Hitesh\\Documents\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-04-12-15-18-30\\ingested_data\\test')
+[2023-04-12 15:18:31,089] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-04-12 15:18:31,089] root - INFO - Downloading file from :[https://raw.githubusercontent.com/sumeet0701/Supply-Chain-Shipment-Pricing-predictions/main/notebook/dataset/Clean_df.csv] into :[C:\Users\Hitesh\Documents\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-04-12-15-18-30\raw_data\Clean_df.csv]
+[2023-04-12 15:18:32,702] root - INFO - File :[C:\Users\Hitesh\Documents\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-04-12-15-18-30\raw_data\Clean_df.csv] has been downloaded successfully.
+[2023-04-12 15:18:32,703] root - INFO - Reading csv file: [C:\Users\Hitesh\Documents\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-04-12-15-18-30\raw_data\Clean_df.csv]
+[2023-04-12 15:18:32,747] root - INFO - Splitting data into train and test
+[2023-04-12 15:18:32,750] root - INFO - Exporting training dataset to file: [C:\Users\Hitesh\Documents\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-04-12-15-18-30\ingested_data\train\Clean_df.csv]
+[2023-04-12 15:18:32,838] root - INFO - Exporting test dataset to file: [C:\Users\Hitesh\Documents\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-04-12-15-18-30\ingested_data\test\Clean_df.csv]
+[2023-04-12 15:18:32,862] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='C:\\Users\\Hitesh\\Documents\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-04-12-15-18-30\\ingested_data\\train\\Clean_df.csv', test_file_path='C:\\Users\\Hitesh\\Documents\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-04-12-15-18-30\\ingested_data\\test\\Clean_df.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-04-12 15:18:32,864] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-04-12 15:18:32,864] root - ERROR - 
+        Error occured in script: [C:\Users\Hitesh\Documents\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [52] 
+        error message: [
+        Error occured in script: [C:\Users\Hitesh\Documents\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [39] 
+        error message: [
+        Error occured in script: [C:\Users\Hitesh\Documents\Shipment_Pricing_Project\Shipment_Pricing\components\data_validation.py] at 
+        line number: [18] 
+        error message: [name 'data_ingestion_config' is not defined]]]
+[2023-04-12 15:18:32,864] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log completed.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

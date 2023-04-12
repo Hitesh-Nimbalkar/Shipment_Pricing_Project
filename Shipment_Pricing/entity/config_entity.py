@@ -9,3 +9,5 @@ DataIngestionConfig=namedtuple("DataIngestionConfig",[
     ])
 
 TrainingPipelineConfig = namedtuple("TrainingPipelineConfig", ["artifact_dir"])
+
+DataValidationConfig = namedtuple("DataValidationConfig", ["schema_file_path"])
