@@ -25,16 +25,6 @@ class IngestedDataValidation:
         except Exception as e:
             raise ApplicationException(e,sys) from e
 
-    def validate_column_length(self)->bool:
-        try:
-            df = pd.read_csv(self.validate_path)
-            if(df.shape[1] == self.data['NumberofColumns']):
-                return True
-            else:
-                return False
-        except Exception as e:
-            raise ApplicationException(e,sys) from e
-
     def missing_values_whole_column(self)->bool:
         try:
             df = pd.read_csv(self.validate_path)
@@ -59,6 +49,7 @@ class IngestedDataValidation:
             df = pd.read_csv(self.validate_path)
             df_column_names = df.columns
             schema_column_names = list(self.data['ColumnNames'].keys())
+            
 
             return True if (collections.Counter(df_column_names) == collections.Counter(schema_column_names)) else False
 

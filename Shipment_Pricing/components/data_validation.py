@@ -56,8 +56,6 @@ class DataValidation:
                 is_train_filename_validated = self.train_data.validate_filename(
                     file_name=train_filename)
 
-                is_train_column_numbers_validated = self.train_data.validate_column_length()
-
                 is_train_column_name_same = self.train_data.check_column_names()
 
                 is_train_missing_values_whole_column = self.train_data.missing_values_whole_column()
@@ -70,8 +68,6 @@ class DataValidation:
                 is_test_filename_validated = self.test_data.validate_filename(
                     file_name=test_filename)
 
-                is_test_column_numbers_validated = self.test_data.validate_column_length()
-
                 is_test_column_name_same = self.test_data.check_column_names()
 
                 is_test_missing_values_whole_column = self.test_data.missing_values_whole_column()
@@ -79,11 +75,11 @@ class DataValidation:
                 self.test_data.replace_null_values_with_null()
 
                 logging.info(
-                    f"Train_set status|is Train filename validated?: {is_train_filename_validated}|is train columns validated?: {is_train_column_numbers_validated}|is train column name validated?: {is_train_column_name_same}|whole missing columns?{is_train_missing_values_whole_column}")
+                    f"Train_set status|is Train filename validated?: {is_train_filename_validated}|is train column name validated?: {is_train_column_name_same}|whole missing columns?{is_train_missing_values_whole_column}")
                 logging.info(
-                    f"Test_set status|is Test filename validated?: {is_test_filename_validated}is test col numbers validated?: {is_test_column_numbers_validated}|is test column names validated? {is_test_column_name_same}| whole missing columns? {is_test_missing_values_whole_column}")
+                    f"Test_set status|is Test filename validated?: {is_test_filename_validated}|is test column names validated? {is_test_column_name_same}| whole missing columns? {is_test_missing_values_whole_column}")
 
-                if is_train_filename_validated & is_train_column_numbers_validated & is_train_column_name_same & is_train_missing_values_whole_column:
+                if is_train_filename_validated  & is_train_column_name_same & is_train_missing_values_whole_column:
                     pass
                 else:
                     validation_status = False
@@ -91,7 +87,7 @@ class DataValidation:
                     raise ValueError(
                         "Check your Training data! Validation failed")
 
-                if is_test_filename_validated & is_test_column_numbers_validated & is_test_column_name_same & is_test_missing_values_whole_column:
+                if is_test_filename_validated  & is_test_column_name_same & is_test_missing_values_whole_column:
                     pass
                 else:
                     validation_status = False

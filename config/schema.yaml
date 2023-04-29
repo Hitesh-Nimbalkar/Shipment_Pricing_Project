@@ -1,40 +1,64 @@
-FileName: "clean_df.csv"
-NumberOfColumns: 12
+FileName: "SCMS_Delivery_History_Dataset.csv"
+
+NumberOfColumns: 33
+
 ColumnNames:
-  Country      :          category
-  Shipment Mode :         category
-  Brand         :         category
-  Dosage Form   :         category
-  Line Item Quantity:        float64
-  Pack_Price         :       float64
-  First Line Designation: category
-  Weight (Kilograms)      :  float64
-  Freight Cost (USD)    :      float64
-  Unit of Measure (Per Pack) : int64
-  Unit Price :                float64
-  Line Item Insurance (USD): float64
+  ID: int64
+  Project_Code: object
+  PQ: object
+  PO/SO: object
+  ASN/DN: object
+  Country: object
+  Managed_By: object
+  Fulfill_Via: object
+  Vendor_INCO_Term: object
+  Shipment_Mode: object
+  PQ_First_Sent_to_Client_Date: object
+  PO_Sent_to_Vendor_Date: object
+  Scheduled_Delivery_Date: object
+  Delivered_to_Client_Date: object
+  Delivery_Recorded_Date: object
+  Product_Group: object
+  Sub_Classification: object
+  Vendor: object
+  Item_Description: object
+  Molecule/Test_Type: object
+  Brand: object
+  Dosage: object
+  Dosage_Form: object
+  Unit_of_Measure_(Per_Pack): int64
+  Line_Item_Quantity: int64
+  Line_Item_Value: float64
+  Pack_Price: float64
+  Unit_Price: float64
+  Manufacturing_Site: object
+  First_Line_Designation: object
+  Weight_(Kilograms): object
+  Freight_Cost_(USD): object
+  Line_Item_Insurance_(USD): float64
 
 
+target_column: Freight_Cost_(USD)
 
+date_columns:
+  - PQ_First_Sent_to_Client_Date
+  - PO_Sent_to_Vendor_Date
+  - Scheduled_Delivery_Date
+  - Delivered_to_Client_Date
+  - Delivery_Recorded_Date
 
-Onehot_column:
-  - Shipment Mode
+numerical_columns:
+  - ID
+  - Weight_(Kilograms)
+  - Line_Item_Value
+  - Line_Item_Quantity
+  - Unit_of_Measure_(Per_Pack)
+  
+categorical_columns:
+  - Project_Code
+  - PQ
+  - PO/SO
+  - ASN/DN
   - Country
-  - Brand
-  - Dosage Form
-
-
-
-Transformation_columns:
-  - Unit of Measure (Per Pack) 
-  - Line Item Quantity 
-  - Line Item Value
-  - pack price 
-  - Unit Price   
-  - Weight (Kilograms) 
-  - Freight Cost (USD) 
-  - Line Item Insurance (USD)  
-
-
-Traget_Column:
-  - Freight Cost (USD)
+  - Managed_By
+  -
