@@ -473,7 +473,7 @@ class DataTransformation:
                         'First Line Designation', 'Weight (Kilograms)', 'Freight Cost (USD)',
                         'Line Item Insurance (USD)']
             
-            logging.info(f"Columns in the original dataset : {all_columns}")
+            
             
 
             
@@ -547,32 +547,23 @@ class DataTransformation:
             transformed_test_df = pd.DataFrame(np.c_[test_arr,np.array(target_feature_test_df)],columns=column_order+[target_column_name])
 
             
-            print("**********")
+        
 
             transformed_train_dir = self.data_transformation_config.transformed_train_dir
             
-            
-            print(transformed_train_dir)
-            
-            
             transformed_test_dir = self.data_transformation_config.transformed_test_dir           
 
-            print("**********")
-            print("**********")
             
             transformed_train_file_path = os.path.join(transformed_train_dir,"transformed_train.csv")
             transformed_test_file_path = os.path.join(transformed_test_dir,"transformed_test.csv")
             
-            print("**********")
-            print("**********")
-            print("**********")
+
             
             
             save_data(file_path = transformed_train_file_path, data = transformed_train_df)
             save_data(file_path = transformed_test_file_path, data = transformed_test_df)
-            
-            save_data(file_path = transformed_train_file_path, data = transformed_train_df)
-            save_data(file_path = transformed_test_file_path, data = transformed_test_df)
+            logging.info("Transformed Train and Transformed test file saved")
+
 
             logging.info("Saving Feature Engineering Object")
             feature_engineering_object_file_path = self.data_transformation_config.feature_engineering_object_file_path
