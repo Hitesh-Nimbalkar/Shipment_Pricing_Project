@@ -48,17 +48,28 @@ date_columns:
   - Delivery_Recorded_Date
 
 numerical_columns:
-  - ID
-  - Weight_(Kilograms)
-  - Line_Item_Value
-  - Line_Item_Quantity
+  - Weight_Kilograms_Clean
   - Unit_of_Measure_(Per_Pack)
+  - Line_Item_Quantity
+  - Line_Item_Value
+  - Pack_Price
+  - Unit_Price
+
+string_columns:
+- Item_Description
+- Molecule/Test_Type
+- Dosage 
+- Manufacturing_Site
   
 categorical_columns:
-  - Project_Code
-  - PQ
-  - PO/SO
-  - ASN/DN
-  - Country
-  - Managed_By
-  -
+  - shipment_mode_encoded
+  - manufacturing_site_encoded
+  - country_encoded
+  - Dosage_Form_encoded
+  - First_Line_Designation_encoded
+  - fulfill_via_encoded
+  - Sub_Classification_encoded
+  - brand_encoded
+ 
+
+

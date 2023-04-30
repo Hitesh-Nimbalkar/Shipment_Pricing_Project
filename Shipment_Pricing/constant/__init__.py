@@ -36,9 +36,20 @@ DATA_VALIDATION_SCHEMA_DIR_KEY = "schema_dir"
 # Data Transformation related variables
 DATA_TRANSFORMATION_CONFIG_KEY = "data_transformation_config"
 DATA_TRANSFORMATION_ARTIFACT_DIR = "data_transformation"
-DATA_TRANSFORMATION_DIR_NAME_KEY = "tranformed_dir"
+DATA_TRANSFORMATION_DIR_NAME_KEY = "transformed_dir"
 DATA_TRANSFORMATION_TRAIN_DIR_NAME_KEY = "transformed_train_dir"
 DATA_TRANSFORMATION_TEST_DIR_NAME_KEY = "transformed_test_dir"
 DATA_TRANSFORMATION_PREPROCESSING_DIR_KEY = "preprocessing_dir"
 DATA_TRANSFORMATION_PREPROCESSING_FILE_NAME_KEY = "preprocessed_object_file_name"
 DATA_TRANSFORMATION_FEATURE_ENGINEERING_FILE_NAME_KEY ="feature_engineering_object_file_name"
+
+DATASET_SCHEMA_COLUMNS_KEY = "Columns"
+DATE_COLUMN_KEY = "date_columns"
+NUMERICAL_COLUMN_KEY = "numerical_columns"
+CATEGORICAL_COLUMN_KEY = "categorical_columns"
+STRING_COLUMN_KEY="string_columns"
+TARGET_COLUMN_KEY = "target_column"
+
+
+
+PIKLE_FOLDER_NAME_KEY = "prediction_files"

@@ -116,6 +116,10 @@ class Configuration:
                                                     transformed_test_dir=transformed_test_dir,
                                                     preprocessed_object_file_path=preprocessed_object_file_path,
                                                     feature_engineering_object_file_path=feature_engineering_object_file_path)
+            
+            
+            logging.info(f"Data Transformation Config: {data_transformation_config}")
+            return data_transformation_config
         except Exception as e:
             raise ApplicationException(e,sys) from e
         
