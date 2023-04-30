@@ -137,7 +137,7 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
             x.drop(columns=columns_to_drop, inplace=True)
             
             
-            x.to_csv('filename.csv', index=False)
+
             return x 
     
         except Exception as e:
@@ -300,7 +300,7 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
             df_clean = df_clean[~df_clean['Freight_Cost_USD_Clean'].str.contains('See')]
             df_clean = df_clean[~df_clean['Weight_Kilograms_Clean'].str.contains('See')]
             
-            df_clean.to_csv('output.csv', index=False)
+
             
             df_clean["Freight_Cost_USD_Clean"]=df_clean["Freight_Cost_USD_Clean"].astype("float")
             df_clean["Weight_Kilograms_Clean"]=df_clean["Weight_Kilograms_Clean"].astype("float")
@@ -489,7 +489,7 @@ class DataTransformation:
             
             
             feature_eng_train_arr = fe_obj.fit_transform(train_df)
-            train_df.to_csv('train_df.csv', index=False)
+            
             logging.info(f"Feature Enineering - Test Data ")
             feature_eng_test_arr = fe_obj.transform(test_df)
 
@@ -545,8 +545,7 @@ class DataTransformation:
             
             transformed_train_df = pd.DataFrame(np.c_[train_arr,np.array(target_feature_train_df)],columns=column_order+[target_column_name])
             transformed_test_df = pd.DataFrame(np.c_[test_arr,np.array(target_feature_test_df)],columns=column_order+[target_column_name])
-            transformed_train_df.to_csv('transformed_train_df.csv', index=False)
-            transformed_test_df.to_csv('transformed_test_df.csv', index=False)
+
             
             print("**********")
 
