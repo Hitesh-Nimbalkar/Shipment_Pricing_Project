@@ -1,0 +1,61 @@
+[2023-05-05 10:59:20,149] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact')
+[2023-05-05 10:59:20,149] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-05-10-59-18\\raw_data', ingested_train_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-05-10-59-18\\ingested_data\\train', ingested_test_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-05-10-59-18\\ingested_data\\test')
+[2023-05-05 10:59:20,150] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-05 10:59:20,150] root - INFO - Downloading file from :[https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv] into :[C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-05-10-59-18\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-05 10:59:22,309] root - INFO - File :[C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-05-10-59-18\raw_data\SCMS_Delivery_History_Dataset.csv] has been downloaded successfully.
+[2023-05-05 10:59:22,309] root - INFO - Reading csv file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-05-10-59-18\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-05 10:59:22,362] root - INFO - Splitting data into train and test
+[2023-05-05 10:59:22,365] root - INFO - Exporting training dataset to file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-05-10-59-18\ingested_data\train\SCMS_Delivery_History_Dataset.csv]
+[2023-05-05 10:59:22,438] root - INFO - Exporting test dataset to file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-05-10-59-18\ingested_data\test\SCMS_Delivery_History_Dataset.csv]
+[2023-05-05 10:59:22,456] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-05-10-59-18\\ingested_data\\train\\SCMS_Delivery_History_Dataset.csv', test_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-05-10-59-18\\ingested_data\\test\\SCMS_Delivery_History_Dataset.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-05-05 10:59:22,458] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-05 10:59:22,464] root - INFO - Validation Process Started
+[2023-05-05 10:59:22,647] root - INFO - Train_set status|is Train filename validated?: True|is train column name validated?: True|whole missing columns?True
+[2023-05-05 10:59:22,647] root - INFO - Test_set status|is Test filename validated?: True|is test column names validated? True| whole missing columns? True
+[2023-05-05 10:59:22,647] root - INFO - Validation Process Completed
+[2023-05-05 10:59:22,647] root - INFO - Data validation artifact: DataValidationArtifact(schema_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\config\\schema.yaml', is_validated=True, message='Data validation performed')
+[2023-05-05 10:59:22,647] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log completed.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+[2023-05-05 10:59:22,647] root - INFO - Data Transformation Config: DataTransformationConfig(transformed_train_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-05-10-59-18\\transformed_data\\train', transformed_test_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-05-10-59-18\\transformed_data\\test', preprocessed_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-05-10-59-18\\preprocessed\\preprocessed.pkl', feature_engineering_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-05-10-59-18\\preprocessed\\feat_eng.pkl')
+[2023-05-05 10:59:22,647] root - INFO - 
+******************** Data Transformation log started ********************
+
+
+[2023-05-05 10:59:22,647] root - INFO - Obtaining training and test file path.
+[2023-05-05 10:59:22,647] root - INFO - Loading training and test data as pandas dataframe.
+[2023-05-05 10:59:22,698] root - INFO - Obtaining feature engineering object.
+[2023-05-05 10:59:22,698] root - INFO - 
+******************** Feature Engneering Started ********************
+
+
+[2023-05-05 10:59:22,698] root - INFO - Applying feature engineering object on training dataframe and testing dataframe
+[2023-05-05 10:59:22,698] root - INFO - Feature Enineering - Train Data 
+[2023-05-05 10:59:26,410] root - INFO -  >>>>>>>>>>>>   Missing Fills :  Shipment_Mode,Manufacturing_Site,Country,Brand <<<<<<<<<<
+[2023-05-05 10:59:26,421] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
+[2023-05-05 10:59:26,463] root - INFO - Feature Enineering - Test Data 
+[2023-05-05 10:59:27,314] root - INFO -  >>>>>>>>>>>>   Missing Fills :  Shipment_Mode,Manufacturing_Site,Country,Brand <<<<<<<<<<
+[2023-05-05 10:59:27,318] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
+[2023-05-05 10:59:27,362] root - INFO - Obtaining preprocessing object.
+[2023-05-05 10:59:27,365] root - INFO - Colums before transformer object Index(['Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price',
+       'Unit_Price', 'Freight_Cost_USD_Clean', 'Weight_Kilograms_Clean',
+       'Shipment_mode', 'Manufacturing_site', 'Country', 'Dosage_Form',
+       'First_Line_Designation', 'Fulfill_via', 'Sub_Classification', 'Brand'],
+      dtype='object')
+[2023-05-05 10:59:27,365] root - INFO - Applying preprocessing object on training dataframe and testing dataframe
+[2023-05-05 10:59:27,387] root - ERROR - 
+        Error occured in script: [C:\Users\Admin\Documents\Shipment_pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [89] 
+        error message: [
+        Error occured in script: [C:\Users\Admin\Documents\Shipment_pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [57] 
+        error message: [
+        Error occured in script: [C:\Users\Admin\Documents\Shipment_pricing_Project\Shipment_Pricing\components\data_transformation.py] at 
+        line number: [582] 
+        error message: [For a sparse output, all columns should be a numeric or convertible to a numeric.]]]
+[2023-05-05 10:59:27,390] root - INFO - 
+******************** Data Transformation log completed ********************
+
+

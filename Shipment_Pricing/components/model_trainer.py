@@ -31,9 +31,9 @@ class ModelTrainer:
         try:
             logging.info("Grid Search for Random forest best parameters started")
             rf = RandomForestRegressor(n_estimators=100, criterion='squared_error',random_state=786)
-            param_grid = {"n_estimators" : [50,100,150,200],
-              "max_depth" : [2,3,4,5,6,7,8,9],
-              "min_samples_split" : [2,4,5,6,10]}
+            param_grid = {"n_estimators" : [50,100,150],
+              "max_depth" : [4,5,6,7,8],
+              "min_samples_split" : [2,4,5,6]}
             grid_rf = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, scoring="r2")
             grid_rf.fit(x_train, y_train)
             logging.info("Grid Search for Random forest best parameters completed")
@@ -42,6 +42,7 @@ class ModelTrainer:
             raise ApplicationException(e,sys) from e
 
     
+   
     
     
     def get_xgboost_best_params(self,x_train,y_train,x_test,y_test)->dict:
@@ -54,7 +55,7 @@ class ModelTrainer:
                 'alpha' :  trial.suggest_loguniform('alpha', 1e-4, 10.0),
                 'colsample_bytree' : trial.suggest_categorical('colsample_bytree', [.1,.2,.3,.4,.5,.6,.7,.8,.9,1]),
                 'subsample' : trial.suggest_categorical('subsample', [.1,.2,.3,.4,.5,.6,.7,.8,.9,1]),
-                'learning_rate' : trial.suggest_categorical('learning_rate',[.00001,.0003,.008,.02,.01,0.10,0.15,0.2,1,10,20]),
+                'learning_rate' : trial.suggest_categorical('learning_rate',[.0003,.008,.02,.01,0.10,0.15,0.2,1,10,20]),
                 'n_estimator' : 130,
                 'max_depth' : trial.suggest_categorical('max_depth', [3,4,5,6,7,8,9,10,11,12]),
                 'random_state' : 786,
@@ -85,6 +86,8 @@ class ModelTrainer:
             return self.get_xgboost_best_params(x_train,y_train,x_test,y_test)
         except Exception as e:
             raise ApplicationException(e,sys) from e
+        
+    
 
     def Random_Forest_Regressor(self,x_train,y_train):
         try:
@@ -99,6 +102,8 @@ class ModelTrainer:
             return rf
         except Exception as e:
             raise ApplicationException(e,sys) from e
+            
+            
 
     def XGBoost_Regressor(self,x_train,y_train,x_test,y_test):
         try:
@@ -120,20 +125,35 @@ class ModelTrainer:
             xgb_obj = self.XGBoost_Regressor(x_train,y_train,x_test,y_test)
             logging.info(f"{'*'*20} Trained XGBoost Model Successfully!! {'*'*20}")
 
+            logging.info(f"{'*'*20} Training Random Forest Model {'*'*20}")
+            rf_obj = self.Random_Forest_Regressor(x_train,y_train)
+            logging.info(f"{'*'*20} Trained Random Forest Model Successfully!! {'*'*20}")
 
             logging.info("***Objects for model obtained!!! Now calcalating R2 score for model evaluation***")
+            rf_r2_train = r2_score(y_train,rf_obj.predict(x_train))
             xgb_r2_train = r2_score(y_train,xgb_obj.predict(x_train))
-            logging.info(f"R2 score for Training set --->XG Boost: {xgb_r2_train}")
+            logging.info(f"R2 score for Training set ---> Random Forest: {rf_r2_train} || XG Boost: {xgb_r2_train}")
+            logging.info(f"R2 score for Training set --->  XG Boost: {xgb_r2_train}")
             
             
+            rf_r2_test = r2_score(y_test, rf_obj.predict(x_test))
             xgb_r2_test = r2_score(y_test, xgb_obj.predict(x_test))
-            logging.info(f"R2 score for Testing set --->  XGBoost : {xgb_r2_test}")
+            logging.info(f"R2 score for Testing set ---> Random Forest : {rf_r2_test} || XGBoost : {xgb_r2_test}")
+            
+            logging.info(f"R2 score for Testing set --->  || XGBoost : {xgb_r2_test}")
+
+
 
             
-            logging.info("XGBoost Model Accepted!!!")
+            if xgb_r2_test > rf_r2_test:
+                logging.info("XGBoost Model Accepted!!!")
+                return xgb_obj
+            else:
+                logging.info("Random Forest Model Accepted!!!")
+                return rf_obj
+            
+
             return xgb_obj
-
-
         except Exception as e:
             raise ApplicationException(e,sys) from e
     
@@ -148,25 +168,23 @@ class ModelTrainer:
             train_df = pd.read_csv(transformed_train_file_path)
             test_df = pd.read_csv(transformed_test_file_path)
             
+            
             target_column_name='Freight_Cost_USD_Clean'
+
+
+            logging.info("Splitting Input features and Target Feature for train and test data")
+            train_target_feature = train_df['Freight_Cost_USD_Clean']
+            train_input_feature = train_df.drop(columns=['Freight_Cost_USD_Clean'], axis=1)
             
-            # Train Dataframe 
-            logging.info(f"Splitting input and target feature from training and testing dataframe.")
-            target_feature_train_df = train_df[target_column_name]
-            input_feature_train_df = train_df.drop(columns = target_column_name,axis = 1)
+            train_input_feature.to_csv('train_input_feature.csv', index=False)
+
+            test_target_feature = test_df['Freight_Cost_USD_Clean']
+            test_input_feature = test_df.drop(columns=['Freight_Cost_USD_Clean'], axis=1)
             
-            Columns=input_feature_train_df.columns
-            logging.info(f"Colums before transformer object {Columns}")
-            
-            # Test Dataframe 
-            target_feature_test_df = test_df[target_column_name]
-            input_feature_test_df = test_df.drop(columns = target_column_name,axis = 1)
-            
-            
+            test_input_feature.to_csv('test_input_feature.csv', index=False)
+
             logging.info("Best Model Finder function called")
-            model_obj = self.get_best_model(input_feature_train_df,target_feature_train_df,input_feature_test_df,target_feature_test_df)
-
-
+            model_obj = self.get_best_model(train_input_feature,train_target_feature,test_input_feature,test_target_feature)
 
             logging.info("Saving best model object file")
             trained_model_object_file_path = self.model_trainer_config.trained_model_file_path

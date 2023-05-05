@@ -51,7 +51,6 @@ numerical_columns:
   - Weight_Kilograms_Clean
   - Unit_of_Measure_(Per_Pack)
   - Line_Item_Quantity
-  - Line_Item_Value
   - Pack_Price
   - Unit_Price
 
@@ -70,6 +69,24 @@ categorical_columns:
   - fulfill_via_encoded
   - Sub_Classification_encoded
   - brand_encoded
+
+
+Columns_remaining :
+  Country: category 
+  Fulfill_Via: category
+  Shipment_Mode: category
+  Product_Group: category
+  Sub_Classification: category
+  Vendor: category
+  Brand: category
+  Dosage_Form: category
+  Unit_of_Measure_(Per_Pack): Float64
+  Line_Item_Quantity: Float64
+  Pack_Price: Float64
+  Unit_Price: Float64
+  First_Line_Designation: category
+  Freight_Cost_USD_Clean: Float64
+  Weight_Kilograms_Clean: Float64
  
 
 
