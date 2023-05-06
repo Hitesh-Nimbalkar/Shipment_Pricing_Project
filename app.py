@@ -1,14 +1,16 @@
 import streamlit as st
-import pickle
 import numpy as np
+import pickle
+
+# Define the mappings
+fulfill_via_mapping = {'From RDC': 0, 'Direct Drop': 1}
+shipment_mode_mapping = {'Truck': 0, 'Air': 1, 'Ocean': 2, 'Air Charter': 3}
+product_group_mapping = {'ARV': 0, 'HRDT': 1, 'ACT': 2, 'ANTM': 3, 'MRDT': 4}
+sub_classification_mapping = {'Pediatric': 0, 'Adult': 1, 'HIV test': 2, 'HIV test - Ancillary': 3, 'ACT': 4, 'Malaria': 5}
 
 # Load the pickled model
 with open('C:/Users/Admin/Documents/Shipment_pricing_Project/prediction_files/model.pkl', 'rb') as f:
     model = pickle.load(f)
-
-
-
-# Add your Streamlit app code below
 
 # Define a function to make predictions
 def predict_price(features):
@@ -18,139 +20,54 @@ def predict_price(features):
     prediction = model.predict(inputs)[0]
     return prediction
 
-# Create a Streamlit app function
-def run():
-    # Set page title
-    st.set_page_config(page_title="Shipment Pricing Prediction")
+# Create the Streamlit app
+def app():
+    st.title("Categorical and Numerical Inputs")
 
-    # Display page header
-    st.title("Shipment Pricing Prediction")
+    # Add the dropdowns for the categorical variables
+    fulfill_via = st.selectbox("Fulfill_Via", list(fulfill_via_mapping.keys()), key="fulfill_via")
+    shipment_mode = st.selectbox("Shipment_Mode", list(shipment_mode_mapping.keys()), key="shipment_mode")
+    product_group = st.selectbox("Product_Group", list(product_group_mapping.keys()), key="product_group")
+    sub_classification = st.selectbox("Sub_Classification", list(sub_classification_mapping.keys()), key="sub_classification")
 
-    # Add input fields for features
+    # Add the numeric input fields
+    unit_of_measure = st.number_input("Unit_of_Measure_(Per_Pack)", value=0.0, step=0.1)
+    line_item_quantity = st.number_input("Line_Item_Quantity", value=0.0, step=0.1)
+    pack_price = st.number_input("Pack_Price", value=0.0, step=0.1)
+    unit_price = st.number_input("Unit_Price", value=0.0, step=0.1)
+    weight_kg = st.number_input("Weight_Kilograms_Clean", value=0.0, step=0.1)
 
+    # Map the selected values to their numerical representations
+    fulfill_via_encoded = fulfill_via_mapping[fulfill_via]
+    shipment_mode_encoded = shipment_mode_mapping[shipment_mode]
+    product_group_encoded = product_group_mapping[product_group]
+    sub_classification_encoded = sub_classification_mapping[sub_classification]
 
-    # Define the CSS styles for the number input buttons
-    number_input_style = """
-        background-color: grey;
-        border: 2px solid #ccc;
-        border-radius: 4px;
-        color: #333;
-        font-size: 16px;
-        padding: 8px 12px;
-        width: 100%;
-    """
+    # Display the encoded values and numeric inputs
+    st.write("Encoded values:")
+    st.write("Fulfill_Via:", fulfill_via_encoded)
+    st.write("Shipment_Mode:", shipment_mode_encoded)
+    st.write("Product_Group:", product_group_encoded)
+    st.write("Sub_Classification:", sub_classification_encoded)
+    st.write("Numeric inputs:")
+    st.write("Unit_of_Measure_(Per_Pack):", unit_of_measure)
+    st.write("Line_Item_Quantity:", line_item_quantity)
+    st.write("Pack_Price:", pack_price)
+    st.write("Unit_Price:", unit_price)
+    st.write("Weight_Kilograms_Clean:", weight_kg)
 
-# Create the number input buttons and apply the CSS styles
-    unit_of_measure = st.number_input('Unit of Measure (Per Pack)', value=0.0, step=1.0, format="%.2f")
-    line_item_quantity = st.number_input('Line Item Quantity', value=0.0, step=1.0, format="%.2f")
-    pack_price = st.number_input('Pack Price', value=0.0, step=1.0, format="%.2f")
-    unit_price = st.number_input('Unit Price', value=0.0, step=1.0, format="%.2f")
-    weight_kilograms = st.number_input('Weight Kilograms', value=0.0, step=1.0, format="%.2f")
+    # Combine the encoded values and numeric inputs into a feature vector
+    features = [fulfill_via_encoded, shipment_mode_encoded, product_group_encoded,
+                sub_classification_encoded, unit_of_measure, line_item_quantity,
+                pack_price, unit_price, weight_kg]
 
-
-    shipment_modes = ['Air', 'Road', 'Sea']
-    shipment_mode = st.selectbox('Shipment Mode', shipment_modes)
-
-    manufacturing_sites = ['Aurobindo Unit III, India', 
-                'Mylan (formerly Matrix) Nashik',
-                'Hetero Unit III Hyderabad IN', 
-                'Cipla, Goa, India',
-                'Strides, Bangalore, India.', 
-                'Alere Medical Co., Ltd.',
-                'Trinity Biotech, Plc', 
-                'ABBVIE Ludwigshafen Germany',
-                'Inverness Japan',
-                'Others', 
-                'ABBVIE (Abbott) Logis. UK',
-                'Chembio Diagnostics Sys. Inc.', 
-                'Standard Diagnostics, Korea',
-                'Aurobindo Unit VII, IN', 
-                'Aspen-OSD, Port Elizabeth, SA',
-                'MSD, Haarlem, NL', 
-                'KHB Test Kit Facility, Shanghai China',
-                'Micro labs, Verna, Goa, India', 
-                'Cipla, Kurkumbh, India',
-                'Emcure Plot No.P-2, I.T-B.T. Park, Phase II, MIDC, Hinjwadi, Pune, India',
-                'BMS Meymac, France', 
-                'Ranbaxy, Paonta Shahib, India',
-                'Hetero, Jadcherla, unit 5, IN', 
-                'Bio-Rad Laboratories' ,
-                'ABBVIE GmbH & Co.KG Wiesbaden', 
-                'Cipla, Patalganga, India',
-                'Pacific Biotech, Thailand', 
-                'Roche Basel',
-                'Gilead(Nycomed) Oranienburg DE', 
-                'Mylan,  H-12 & H-13, India']
-
-    manufacturing_site = st.selectbox('Manufacturing Site', manufacturing_sites)
-
-    countries = ["Côte d'Ivoire",'Zambia','Others','Nigeria','Tanzania','Mozambique','Zimbabwe','South Africa','Rwanda','Haiti','Vietnam','Uganda','Congo, DRC','Ghana','Ethiopia','Kenya','South Sudan','Sudan','Guyana','Cameroon','Dominican Republic','Burundi','Namibia','Botswana']
-    country = st.selectbox('Country', countries)
-
-    dosage_forms = ["Tablet","Oral", "Capsule", "Test kit", "Injection"]
-    dosage_form = st.selectbox('Dosage Form', dosage_forms)
-
-    first_line_designations = ['Yes', 'No']
-    first_line_designation = st.selectbox('First Line Designation', first_line_designations)
-
-    fulfill_vias = ['From RDC', 'Direct Drop']
-    fulfill_via = st.selectbox('Fulfill Via', fulfill_vias)
-
-    sub_classifications = ['Adult',
-               'Pediatric',
-                'HIV test',
-                'HIV test - Ancillary',
-               'Malaria',
-               'ACT']
-    sub_classification = st.selectbox('Sub Classification', sub_classifications)
-
-    brands = ['Others',
-                                                                        'Generic',
-                                                                        'Determine',
-                                                                        'Uni-Gold',
-                                                                        'Stat-Pak',
-                                                                        'Aluvia',
-                                                                        'Bioline',
-                                                                        'Kaletra',
-                                                                        'Norvir',
-                                                                        'Colloidal Gold',
-                                                                        'Truvada']
-    brand = st.selectbox('Brand', brands)
-
-    # Map categorical features to encoded values
-    shipment_mode_encoded = shipment_modes.index(shipment_mode)
-    manufacturing_site_encoded = manufacturing_sites.index(manufacturing_site)
-    country_encoded = countries.index(country)
-    dosage_form_encoded = dosage_forms.index(dosage_form)
-    first_line_designation_encoded = first_line_designations.index(first_line_designation)
-    fulfill_via_encoded = fulfill_vias.index(fulfill_via)
-    sub_classification_encoded = sub_classifications.index(sub_classification)
-    brand_encoded = brands.index(brand)
-
-    
+    # Add a button to make predictions using the loaded model
+    if st.button("Predict"):
+        # Call the prediction function
+        prediction = predict_price(features)
+        # Display the predicted price
+        st.write("The predicted price is", prediction)
 
 
-    
-
-    # Create a button to trigger the prediction
-    if st.button('Predict'):
-        # Combine the input features into a list
-
-# Combine the input features into a list
-        inputs = [unit_of_measure, line_item_quantity,
-                pack_price, unit_price, weight_kilograms,
-                shipment_mode_encoded, manufacturing_site_encoded, country_encoded,
-                dosage_form_encoded, first_line_designation_encoded, fulfill_via_encoded,
-                sub_classification_encoded,brand_encoded]
-
-
-        # Make a prediction using the loaded model
-        prediction = predict_price(inputs)
-
-
-        # Display the prediction
-        st.success(f'The estimated shipment price is {prediction:.2f} USD.')
-
-# Run the Streamlit app
-if __name__ == '__main__':
-    run()
+if __name__ == "__main__":
+    app()

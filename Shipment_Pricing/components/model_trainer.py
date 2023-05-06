@@ -31,9 +31,9 @@ class ModelTrainer:
         try:
             logging.info("Grid Search for Random forest best parameters started")
             rf = RandomForestRegressor(n_estimators=100, criterion='squared_error',random_state=786)
-            param_grid = {"n_estimators" : [50,100,150],
-              "max_depth" : [4,5,6,7,8],
-              "min_samples_split" : [2,4,5,6]}
+            param_grid = {"n_estimators" : [50,100,150,170],
+              "max_depth" : [4,5,6,7,8,10,15],
+              "min_samples_split" : [2,4,5,6,7]}
             grid_rf = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, scoring="r2")
             grid_rf.fit(x_train, y_train)
             logging.info("Grid Search for Random forest best parameters completed")
@@ -55,9 +55,9 @@ class ModelTrainer:
                 'alpha' :  trial.suggest_loguniform('alpha', 1e-4, 10.0),
                 'colsample_bytree' : trial.suggest_categorical('colsample_bytree', [.1,.2,.3,.4,.5,.6,.7,.8,.9,1]),
                 'subsample' : trial.suggest_categorical('subsample', [.1,.2,.3,.4,.5,.6,.7,.8,.9,1]),
-                'learning_rate' : trial.suggest_categorical('learning_rate',[.0003,.008,.02,.01,0.10,0.15,0.2,1,10,20]),
+                'learning_rate' : trial.suggest_categorical('learning_rate',[.02,.01,0.10,0.15,0.2,1]),
                 'n_estimator' : 130,
-                'max_depth' : trial.suggest_categorical('max_depth', [3,4,5,6,7,8,9,10,11,12]),
+                'max_depth' : trial.suggest_categorical('max_depth', [3,4,5,6,7,8,9,10,11,12,15,20,30,35]),
                 'random_state' : 786,
                 'min_child_weight' : trial.suggest_int('min_child_weight',1,200),
                 'booster' : trial.suggest_categorical('booster',["gblinear","gbtree","dart"]),
@@ -112,7 +112,7 @@ class ModelTrainer:
 
             logging.info(f"XGB Best Parameters : {xgb_best_params}")
             logging.info("Fitting XG Boost model")
-            xgb = XGBRegressor(objective="reg:squarederror",n_estimator=130, random_state = 786,**xgb_best_params)
+            xgb = XGBRegressor(objective="reg:squarederror",n_estimator=150, random_state = 786,**xgb_best_params)
             xgb.fit(x_train,y_train)
 
             return xgb
@@ -173,15 +173,14 @@ class ModelTrainer:
 
 
             logging.info("Splitting Input features and Target Feature for train and test data")
-            train_target_feature = train_df['Freight_Cost_USD_Clean']
-            train_input_feature = train_df.drop(columns=['Freight_Cost_USD_Clean'], axis=1)
+            train_target_feature = train_df['remainder__Freight_Cost_USD_Clean']
+            train_input_feature = train_df.drop(columns=['remainder__Freight_Cost_USD_Clean'], axis=1)
             
-            train_input_feature.to_csv('train_input_feature.csv', index=False)
 
-            test_target_feature = test_df['Freight_Cost_USD_Clean']
-            test_input_feature = test_df.drop(columns=['Freight_Cost_USD_Clean'], axis=1)
+
+            test_target_feature = test_df['remainder__Freight_Cost_USD_Clean']
+            test_input_feature = test_df.drop(columns=['remainder__Freight_Cost_USD_Clean'], axis=1)
             
-            test_input_feature.to_csv('test_input_feature.csv', index=False)
 
             logging.info("Best Model Finder function called")
             model_obj = self.get_best_model(train_input_feature,train_target_feature,test_input_feature,test_target_feature)

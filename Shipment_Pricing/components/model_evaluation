@@ -1,4 +1,0 @@
-from Shipment_Pricing.utils.utils import save_object
-
-
-save_object(file_path=os.path.join(ROOT_DIR,PIKLE_FOLDER_NAME_KEY,os.path.basename(trained_model_object_file_path)),obj=model_obj)

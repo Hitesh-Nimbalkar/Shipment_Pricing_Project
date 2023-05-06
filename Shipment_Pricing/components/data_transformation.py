@@ -32,37 +32,39 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
         
     def Map_encoding(self,x):
         try:
-            Encode_Features=['Country', 'Fulfill_Via', 
-                        'Shipment_Mode','Vendor', 'Brand', 'Dosage_Form',
-                        'Product_Group',
-                        'Sub_Classification',
-                        'First_Line_Designation']
+            Encode_Features=[]
+            # Check for non-float columns in x and include them in the encoding feature list
+            for col in x.columns:
+                if x[col].dtype == "object" or x[col].dtype == "category":
+                    if col not in Encode_Features:
+                        Encode_Features.append(col)
+                        
+            
             x.to_csv('Before_Encoding.csv', index=False)
-            logging.info(f"Columns Before encoding {x.columns}")
+            logging.info(f"Columns before encoding: {x.columns}")
+            
+            # Print information about each feature to be encoded
             for feature in Encode_Features:
                 unique_values = x[feature].unique()
-                print(f"Unique values of {feature}: {unique_values}")
-                print("\n")
+                logging.info(f"Unique values of {feature}: {unique_values}")
+                logging.info("\n")
+                logging.info(f"Number of unique values of {feature}: {len(unique_values)}")
 
             # Define the mapping for each feature
             mapping = {}
             for feature in Encode_Features:
                 unique_values = x[feature].unique()
                 mapping[feature] = {value: idx for idx, value in enumerate(unique_values)}
-
+                logging.info(f"Mapping for {feature}: {mapping[feature]}")
+                
             # Use the mapping to encode each feature and add encoded values to dataframe
             for feature in Encode_Features:
                 encoded_values = x[feature].map(mapping[feature])
                 x[f"{feature}"] = encoded_values
             x.to_csv("Encoded_data.csv", index=False)    
-            # Drop the original columns
             
-        
+            return x
 
-            
-            
-
-            return x 
     
         except Exception as e:
             raise ApplicationException(e,sys) from e 
@@ -71,33 +73,38 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
     def data_modification(self,x):
         try:
             
-            # Manufacturing Site - "Others"
-          #  counts = x['Manufacturing_Site'].value_counts()
-          #  idx = counts[counts.lt(20)].index
-          #  x.loc[x['Manufacturing_Site'].isin(idx), 'Manufacturing_Site'] = 'Others'
-            
-            # Country 
-            counts = x['Country'].value_counts()
-            idx = counts[counts.lt(30)].index
-            x.loc[x['Country'].isin(idx), 'Country'] = 'Others'
+            if 'Manufacturing_Site' in x.columns:
+                # Manufacturing Site - "Others"
+                counts = x['Manufacturing_Site'].value_counts()
+                idx = counts[counts.lt(20)].index
+                x.loc[x['Manufacturing_Site'].isin(idx), 'Manufacturing_Site'] = 'Others'
 
-            
-            # Brand 
-            counts = x['Brand'].value_counts()
-            idx = counts[counts.lt(50)].index
-            x.loc[x['Brand'].isin(idx), 'Brand'] = 'Others'
-            
-            # Dosage Form modification
-            x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("Tablet",case=False)),"Tablet",x["Dosage_Form"])
-            x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("Oral",case=False)),"Oral",x["Dosage_Form"])
-            x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("Capsule",case=False)),"Capsule",x["Dosage_Form"])
-            x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("kit",case=False)),"Test kit",x["Dosage_Form"])
-            
-            
+            if 'Country' in x.columns:
+                # Country 
+                counts = x['Country'].value_counts()
+                idx = counts[counts.lt(30)].index
+                x.loc[x['Country'].isin(idx), 'Country'] = 'Others'
+
+            if 'Brand' in x.columns:
+                # Brand 
+                counts = x['Brand'].value_counts()
+                idx = counts[counts.lt(50)].index
+                x.loc[x['Brand'].isin(idx), 'Brand'] = 'Others'
+
+            if 'Dosage_Form' in x.columns:
+                # Dosage Form modification
+                x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("Tablet",case=False)),"Tablet",x["Dosage_Form"])
+                x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("Oral",case=False)),"Oral",x["Dosage_Form"])
+                x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("Capsule",case=False)),"Capsule",x["Dosage_Form"])
+                x["Dosage_Form"]=np.where((x['Dosage_Form'].str.contains("kit",case=False)),"Test kit",x["Dosage_Form"])
             
             logging.info(
                     f" >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<")
+           
             return x
+                
+            
+
         
         except Exception as e:
             raise ApplicationException(e,sys) from e 
@@ -105,53 +112,49 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
     def drop_columns(self,x):
         try:
             
+            # define original column names of x
+            columns = ['ID', 'Project_Code', 'PQ', 'PO/SO', 'ASN/DN', 'Country', 'Managed_By',
+                    'Fulfill_Via', 'Vendor_INCO_Term', 'Shipment_Mode',
+                    'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date',
+                    'Scheduled_Delivery_Date', 'Delivered_to_Client_Date',
+                    'Delivery_Recorded_Date', 'Product_Group', 'Sub_Classification',
+                    'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Brand', 'Dosage',
+                    'Dosage_Form', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity',
+                    'Line_Item_Value', 'Pack_Price', 'Unit_Price', 'Manufacturing_Site',
+                    'First_Line_Designation', 'Weight_(Kilograms)', 'Freight_Cost_(USD)',
+                    'Line_Item_Insurance_(USD)']
+
+            # specify columns to drop initially
             columns_to_drop = ['ID', 'Project_Code', 'PQ', 'PO/SO', 'ASN/DN', 'Managed_By', 'Vendor_INCO_Term',
-                                'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date',
-                                'Scheduled_Delivery_Date', 'Delivered_to_Client_Date',
-                                'Delivery_Recorded_Date','Line_Item_Value',
-                                'Item_Description', 'Molecule/Test_Type', 'Dosage',
-                                'Weight_(Kilograms)', 'Freight_Cost_(USD)','Line_Item_Insurance_(USD)','Manufacturing_Site']
-            
+                            'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date',
+                            'Scheduled_Delivery_Date', 'Delivered_to_Client_Date',
+                            'Delivery_Recorded_Date', 'Product_Group','Line_Item_Value',
+                            'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Dosage',
+                            'Weight_(Kilograms)', 'Freight_Cost_(USD)','Line_Item_Insurance_(USD)']
+
+            # drop the specified columns from x
             x.drop(columns=columns_to_drop, inplace=True)
-            logging.info('Columns Dropped')
-            logging.info(f"Columns After dropping {x.columns}")
-            
-            data_types = {
-                'Country': 'object',
-                'Fulfill_Via': 'category',
-                'Shipment_Mode': 'category',
-                'Product_Group': 'category',
-                'Sub_Classification': 'category',
-                'Vendor': 'category',
-                'Brand': 'object',
-                'Dosage_Form': 'object',
-                'Unit_of_Measure_(Per_Pack)': 'float64',
-                'Line_Item_Quantity': 'float64',
-                'Pack_Price': 'float64',
-                'Unit_Price': 'float64',
-                'First_Line_Designation': 'category',
-                'Freight_Cost_USD_Clean': 'float64',
-                'Weight_Kilograms_Clean': 'float64'
-            }
 
-            # Assume that your dataframe is called "df"
-            for col, dtype in data_types.items():
-                if col in x.columns:
-                    x[col] = x[col].astype(dtype)
+            # print remaining columns for user selection
+            logging.info("\n")
+            print('Remaining columns:')
+            for col in x.columns:
+                logging.info(col)
 
-            # Logging the datatypes of columns after changing
-            logging.info(f'DataTypes of Columns After changing: \n{x.dtypes}')
-            
-        
-            # Assuming 'df' is the name of your dataframe
-            logging.info('Columns and DataTypes: \n\n{}'.format(x.dtypes))
-            
-            
-            
-            
-            
-            
+            # user selects which columns to drop
+            user_selection = input('\nEnter the name(s) of the column(s) you would like to drop (comma-separated): ')
 
+            # convert user's selections to a list
+            user_selection_list = [col.strip() for col in user_selection.split(',')]
+
+            # drop selected columns
+            x.drop(columns=user_selection_list, inplace=True)
+
+            # display final DataFrame
+            logging.info('\nFinal DataFrame:')
+            logging.info(x.head())
+            
+            logging.info("Drop Columns Complete")
             
             return x
         except Exception as e:
@@ -161,26 +164,34 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
     def Missing_fills(self,x):
         try:
             # Shipment Mode - Mode 
-            mode=x['Shipment_Mode'].mode()
-            x['Shipment_Mode']=x['Shipment_Mode'].fillna(mode[0])
-            
-            # Shipment Mode - Mode 
-           # mode=x['Manufacturing_Site'].mode()
-           # x['Manufacturing_Site']=x['Manufacturing_Site'].fillna(mode[0])
-            
-            # Shipment Mode - Mode 
-            mode=x['Country'].mode()
-            x['Country']=x['Country'].fillna(mode[0])
-            
-             #BRand 
-            mode=x['Brand'].mode()
-            x['Brand']=x['Brand'].fillna(mode[0])
-            
-            
-            logging.info(
-                    f" >>>>>>>>>>>>   Missing Fills :  Shipment_Mode,Manufacturing_Site,Country,Brand <<<<<<<<<<")
-            
+            if 'Shipment_Mode' in x.columns:
+                mode=x['Shipment_Mode'].mode()
+                x['Shipment_Mode']=x['Shipment_Mode'].fillna(mode[0])
+                logging.info('Filled missing values in column "Shipment_Mode" with mode value:', mode[0])
+
+            # Manufacturing Site - Mode 
+            if 'Manufacturing_Site' in x.columns:
+                mode=x['Manufacturing_Site'].mode()
+                x['Manufacturing_Site']=x['Manufacturing_Site'].fillna(mode[0])
+                logging.info('Filled missing values in column "Manufacturing_Site" with mode value:', mode[0])
+
+            # Country - Mode 
+            if 'Country' in x.columns:
+                mode=x['Country'].mode()
+                x['Country']=x['Country'].fillna(mode[0])
+                logging.info('Filled missing values in column "Country" with mode value:', mode[0])
+
+            # Brand 
+            if 'Brand' in x.columns:
+                mode=x['Brand'].mode()
+                x['Brand']=x['Brand'].fillna(mode[0])
+                logging.info('Filled missing values in column "Brand" with mode value:', mode[0])
+
+                            
+
             return x
+    
+            
     
             
  
@@ -190,18 +201,31 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
         
     def outlier(self,x):
         try:
-            import logging
-            import numpy as np
-            from sklearn.impute import SimpleImputer
-
-            impute_cols = ['Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean']
-
-            for i in impute_cols:
-                median = np.median(x[i])
-                x[i] = np.where(np.isnan(x[i]), median, x[i])
-                logging.info(f"Missing values in {i} column have been imputed with median")
-
-            logging.info('Missing value imputation with median completed')
+            logging.info("Outlier Detection")
+            # Select all float columns except Freight_Cost_USD_Clean
+            float_cols = [col for col in x.columns if x[col].dtype == 'float' and col != 'Freight_Cost_USD_Clean']
+                
+            for i in float_cols:
+                Q1 = np.percentile(x[i], 25)
+                Q3 = np.percentile(x[i], 75)
+                IQR = Q3 - Q1
+                lower_limit = Q1 - (1.5 * IQR)
+                upper_limit = Q3 + (1.5 * IQR)   
+                
+                print('Column:', i)
+                print('Q1:', Q1)
+                print('Q3:', Q3)
+                print('IQR:', IQR)
+                print('Upper limit:', upper_limit)
+                print('Lower limit:', lower_limit)
+                
+                median = x[i].median()
+                x[i] = np.where(x[i]>upper_limit, median, np.where(x[i]<lower_limit, median, x[i]))
+                print("\n")
+                logging.info('No. of outliers detected:', len(np.where((x[i] > upper_limit) | (x[i] < lower_limit))[0]))
+                
+            
+            logging.info("Outlier Detection Complete")
 
             return x
         except Exception as e:
@@ -283,6 +307,7 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
     def data_wrangling(self,x):
         try:
             # Weight_(kilograms) and Freight_Cost Data Clean 
+            
             data=self.Weight_and_freight(x)
             
             # Dropping Columns 
@@ -292,19 +317,25 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
 
             # Filling Missing Data 
             data= self.Missing_fills(data)
-          
+            
             
             # Data Modification 
             data = self.data_modification(data)
             
             # Outlier Detection 
+            
             data = self.outlier(data)
             
-            # Data Encoding 
-            data = self.Map_encoding(data)
-         
-            # Drop Columns 
+            logging.info(f'Columnsof data after data wrangling:{data.columns}')
             
+            
+
+                # Perform map encoding
+            #data = self.Map_encoding(data)
+           
+
+            data.to_csv("data_modiefied.csv",index=False)
+            logging.info('Data Modified  Completed and Saved ')
             
             return data
     
@@ -320,24 +351,23 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
             X = self.data_wrangling(X)
             
             
-
-            # Reindex DataFrame with new column order
-            logging.info('Data Wrangling Completed')
-            logging.info('Columns after data wrangling:\n%s', X.columns.to_list())
             
-            # reorder columns
-            new_order = ['Country', 'Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification','First_Line_Designation',
-                         'Vendor', 'Brand', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity',
-                         'Pack_Price', 'Unit_Price', 'Freight_Cost_USD_Clean','Weight_Kilograms_Clean']
-            X = X.reindex(columns=new_order)
 
+            new_col_order =['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean','Unit_of_Measure_(Per_Pack)',
+       'Line_Item_Quantity','Fulfill_Via', 'Shipment_Mode','Country',
+       'Sub_Classification', 'Dosage_Form',  'First_Line_Designation','Freight_Cost_USD_Clean']
+            print("\n")
+            logging.info(f"New Column Order {new_col_order}")
+            print("\n")
+            X = X[new_col_order]
+            logging.info(f"Datatypes : {X.dtypes}")
+            X.to_csv('Data_Transform Complete.csv', index=False)
+            logging.info(f"Columns : {X.columns}")
+                
 
             
-            X.to_csv('data_wrangling.csv',index=False)
-            
-        
             arr = X.values
-
+            
             return arr
         except Exception as e:
             raise ApplicationException(e,sys) from e
@@ -374,21 +404,34 @@ class DataTransformation:
        
             logging.info('Creating Data Transformer Object')
             
-            numerical_columns=['Unit_of_Measure_(Per_Pack)','Line_Item_Quantity','Pack_Price','Unit_Price','Weight_Kilograms_Clean']
-            category_columns=['Country','Fulfill_Via','Shipment_Mode','Product_Group', 
-                              'Sub_Classification','Vendor','Brand','Dosage_Form','First_Line_Designation']
- 
-            num_pipeline = Pipeline(steps =[("impute", SimpleImputer(strategy="median")),
-                                            ("scaler",StandardScaler())])
+            # Define the numerical and categorical columns in your dataset
+            numerical_columns = ['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
+                                'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity']
+            
+            categorical_columns = ['Fulfill_Via', 'Shipment_Mode', 'Country',
+                                'Sub_Classification', 'Dosage_Form', 'First_Line_Designation']
 
-            cat_pipeline = Pipeline(steps = [("impute", SimpleImputer(strategy="most_frequent"))
-                                             ])
+            # Define transformers for numerical and categorical columns
+            num_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy='median')),
+                ('scaler', RobustScaler())
+            ])
 
-            preprocessing = ColumnTransformer([('num_pipeline',num_pipeline,numerical_columns),
-                                               ('cat_pipeline',cat_pipeline,category_columns)])
+            cat_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy='most_frequent')),
+                ('onehot', OneHotEncoder(handle_unknown='ignore',sparse=False))
+            ])
 
-            logging.info('Data Transformer Object created successfully')
-            return preprocessing
+            # Combine the transformers using ColumnTransformer
+            preprocessor = ColumnTransformer(
+                transformers=[
+                    ('num', num_transformer, numerical_columns),
+                    ('cat', cat_transformer, categorical_columns)
+                ],
+                remainder='passthrough'
+            )
+
+            return preprocessor
         except Exception as e:
             raise ApplicationException(e,sys) from e
         
@@ -435,63 +478,57 @@ class DataTransformation:
             
             # Converting featured engineered array into dataframe
             logging.info(f"Converting featured engineered array into dataframe.")
-            col=['Country', 'Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification','First_Line_Designation',
-                         'Vendor', 'Brand', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity',
-                         'Pack_Price', 'Unit_Price', 'Freight_Cost_USD_Clean','Weight_Kilograms_Clean']
+
+            col =['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean','Unit_of_Measure_(Per_Pack)',
+                'Line_Item_Quantity','Fulfill_Via', 'Shipment_Mode','Country',
+                'Sub_Classification', 'Dosage_Form',  'First_Line_Designation','Freight_Cost_USD_Clean']
             
+            logging.info(f"Columns for Feature Engineering : {col}")
             feature_eng_train_df = pd.DataFrame(feature_eng_train_arr,columns=col)
-            
+            logging.info(f"Feature Engineering - Train Completed")
             feature_eng_test_df = pd.DataFrame(feature_eng_test_arr,columns=col)
             
+            logging.info(f"Saving feature engineered training and testing dataframe.")
             feature_eng_train_df.to_csv('feature_eng_train_df.csv',index=False)
 
             target_column_name='Freight_Cost_USD_Clean'
             
             # Train Dataframe 
             logging.info(f"Splitting input and target feature from training and testing dataframe.")
-            target_feature_train_df = feature_eng_train_df[target_column_name]
-            input_feature_train_df = feature_eng_train_df.drop(columns = target_column_name,axis = 1)
-            
-            Columns=input_feature_train_df.columns
-            logging.info(f"Colums before transformer object {Columns}")
-            
-            
-            # Test Dataframe 
-            target_feature_test_df = feature_eng_test_df[target_column_name]
-            input_feature_test_df = feature_eng_test_df.drop(columns = target_column_name,axis = 1)
-            
+            input_feature_train_df = feature_eng_train_df
             input_feature_train_df.to_csv('input_feature_train_df.csv',index=False)
+            # Test Dataframe 
+            input_feature_test_df = feature_eng_test_df
             
+            
+            ## Preprocessing 
 
             logging.info(f"Obtaining preprocessing object.")
             preprocessing_obj = self.get_data_transformer_object()
-            
-
             logging.info(f"Applying preprocessing object on training dataframe and testing dataframe")
-            
             
             train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             test_arr = preprocessing_obj.transform(input_feature_test_df)
             
-            column_order=['Unit_of_Measure_(Per_Pack)','Line_Item_Quantity', 'Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
-                     'Country', 'Fulfill_Via', 'Shipment_Mode','Product_Group', 'Sub_Classification', 'Vendor', 'Brand', 'Dosage_Form',
-                     'First_Line_Designation']
-            transformed_train_df = pd.DataFrame(np.c_[train_arr,np.array(target_feature_train_df)],columns=column_order+[target_column_name])
-            transformed_test_df = pd.DataFrame(np.c_[test_arr,np.array(target_feature_test_df)],columns=column_order+[target_column_name])
+            # Get the list of column names for the preprocessed data
+            preprocessed_columns = preprocessing_obj.get_feature_names_out()
+            
+            logging.info(f"Converting preprocessed array into dataframe.")
+            transformed_train_df = pd.DataFrame(train_arr,columns=preprocessed_columns)
+            transformed_test_df = pd.DataFrame(test_arr,columns=preprocessed_columns)
 
             
         
-
+            # Adding target column to transformed dataframe
             transformed_train_dir = self.data_transformation_config.transformed_train_dir
-            
-            transformed_test_dir = self.data_transformation_config.transformed_test_dir           
-
-            
+            transformed_test_dir = self.data_transformation_config.transformed_test_dir    
+        
             transformed_train_file_path = os.path.join(transformed_train_dir,"transformed_train.csv")
             transformed_test_file_path = os.path.join(transformed_test_dir,"transformed_test.csv")
             
 
-            
+            ## Saving transformed train and test file
+            logging.info("Saving Transformed Train and Transformed test file")
             
             save_data(file_path = transformed_train_file_path, data = transformed_train_df)
             save_data(file_path = transformed_test_file_path, data = transformed_test_df)

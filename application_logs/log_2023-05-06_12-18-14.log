@@ -1,0 +1,210 @@
+[2023-05-06 12:18:15,994] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact')
+[2023-05-06 12:18:15,994] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-12-18-14\\raw_data', ingested_train_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-12-18-14\\ingested_data\\train', ingested_test_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-12-18-14\\ingested_data\\test')
+[2023-05-06 12:18:15,995] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-06 12:18:15,995] root - INFO - Downloading file from :[https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv] into :[C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-12-18-14\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 12:18:17,557] root - INFO - File :[C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-12-18-14\raw_data\SCMS_Delivery_History_Dataset.csv] has been downloaded successfully.
+[2023-05-06 12:18:17,557] root - INFO - Reading csv file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-12-18-14\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 12:18:17,610] root - INFO - Splitting data into train and test
+[2023-05-06 12:18:17,612] root - INFO - Exporting training dataset to file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-12-18-14\ingested_data\train\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 12:18:17,688] root - INFO - Exporting test dataset to file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-12-18-14\ingested_data\test\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 12:18:17,709] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-12-18-14\\ingested_data\\train\\SCMS_Delivery_History_Dataset.csv', test_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-12-18-14\\ingested_data\\test\\SCMS_Delivery_History_Dataset.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-05-06 12:18:17,711] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-06 12:18:17,719] root - INFO - Validation Process Started
+[2023-05-06 12:18:17,905] root - INFO - Train_set status|is Train filename validated?: True|is train column name validated?: True|whole missing columns?True
+[2023-05-06 12:18:17,905] root - INFO - Test_set status|is Test filename validated?: True|is test column names validated? True| whole missing columns? True
+[2023-05-06 12:18:17,905] root - INFO - Validation Process Completed
+[2023-05-06 12:18:17,905] root - INFO - Data validation artifact: DataValidationArtifact(schema_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\config\\schema.yaml', is_validated=True, message='Data validation performed')
+[2023-05-06 12:18:17,905] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log completed.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+[2023-05-06 12:18:17,906] root - INFO - Data Transformation Config: DataTransformationConfig(transformed_train_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\transformed_data\\train', transformed_test_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\transformed_data\\test', preprocessed_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\preprocessed\\preprocessed.pkl', feature_engineering_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\preprocessed\\feat_eng.pkl')
+[2023-05-06 12:18:17,906] root - INFO - 
+******************** Data Transformation log started ********************
+
+
+[2023-05-06 12:18:17,906] root - INFO - Obtaining training and test file path.
+[2023-05-06 12:18:17,906] root - INFO - Loading training and test data as pandas dataframe.
+[2023-05-06 12:18:17,960] root - INFO - Extracting train column name ['ID', 'Project_Code', 'PQ', 'PO/SO', 'ASN/DN', 'Country', 'Managed_By', 'Fulfill_Via', 'Vendor_INCO_Term', 'Shipment_Mode', 'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date', 'Scheduled_Delivery_Date', 'Delivered_to_Client_Date', 'Delivery_Recorded_Date', 'Product_Group', 'Sub_Classification', 'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Brand', 'Dosage', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Line_Item_Value', 'Pack_Price', 'Unit_Price', 'Manufacturing_Site', 'First_Line_Designation', 'Weight_(Kilograms)', 'Freight_Cost_(USD)', 'Line_Item_Insurance_(USD)']
+[2023-05-06 12:18:17,960] root - INFO - Obtaining feature engineering object.
+[2023-05-06 12:18:17,960] root - INFO - 
+******************** Feature Engneering Started ********************
+
+
+[2023-05-06 12:18:17,960] root - INFO - Applying feature engineering object on training dataframe and testing dataframe
+[2023-05-06 12:18:17,960] root - INFO - Feature Enineering - Train Data 
+[2023-05-06 12:18:21,603] root - INFO - Weight and Freight Cost Data Clean Completed
+[2023-05-06 12:18:21,604] root - INFO - Columns Dropped
+[2023-05-06 12:18:21,604] root - INFO - Columns After dropping Index(['Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price',
+       'Unit_Price', 'Freight_Cost_USD_Clean', 'Weight_Kilograms_Clean'],
+      dtype='object')
+[2023-05-06 12:18:21,608] root - INFO - DataTypes of Columns After changing: 
+Fulfill_Via                   category
+Shipment_Mode                 category
+Product_Group                 category
+Sub_Classification            category
+Unit_of_Measure_(Per_Pack)     float64
+Line_Item_Quantity             float64
+Pack_Price                     float64
+Unit_Price                     float64
+Freight_Cost_USD_Clean         float64
+Weight_Kilograms_Clean         float64
+dtype: object
+[2023-05-06 12:18:21,608] root - INFO - Columns and DataTypes: 
+
+Fulfill_Via                   category
+Shipment_Mode                 category
+Product_Group                 category
+Sub_Classification            category
+Unit_of_Measure_(Per_Pack)     float64
+Line_Item_Quantity             float64
+Pack_Price                     float64
+Unit_Price                     float64
+Freight_Cost_USD_Clean         float64
+Weight_Kilograms_Clean         float64
+dtype: object
+[2023-05-06 12:18:21,609] root - INFO -  >>>>>>>>>>>>   Missing Fills :  Shipment_Mode,Manufacturing_Site,Country,Brand <<<<<<<<<<
+[2023-05-06 12:18:21,609] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
+[2023-05-06 12:18:21,610] root - INFO - Missing values in Unit_of_Measure_(Per_Pack) column have been imputed with median
+[2023-05-06 12:18:21,610] root - INFO - Missing values in Line_Item_Quantity column have been imputed with median
+[2023-05-06 12:18:21,610] root - INFO - Missing values in Pack_Price column have been imputed with median
+[2023-05-06 12:18:21,610] root - INFO - Missing values in Unit_Price column have been imputed with median
+[2023-05-06 12:18:21,611] root - INFO - Missing values in Weight_Kilograms_Clean column have been imputed with median
+[2023-05-06 12:18:21,611] root - INFO - Missing value imputation with median completed
+[2023-05-06 12:18:21,634] root - INFO - Columns encoding Index(['Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price',
+       'Unit_Price', 'Freight_Cost_USD_Clean', 'Weight_Kilograms_Clean'],
+      dtype='object')
+[2023-05-06 12:18:21,635] root - INFO - Unique values of Fulfill_Via: ['From RDC', 'Direct Drop']
+Categories (2, object): ['Direct Drop', 'From RDC']
+[2023-05-06 12:18:21,636] root - INFO - Unique values of Shipment_Mode: ['Truck', 'Air', 'Ocean', 'Air Charter']
+Categories (4, object): ['Air', 'Air Charter', 'Ocean', 'Truck']
+[2023-05-06 12:18:21,638] root - INFO - Unique values of Product_Group: ['ARV', 'HRDT', 'ACT', 'ANTM', 'MRDT']
+Categories (5, object): ['ACT', 'ANTM', 'ARV', 'HRDT', 'MRDT']
+[2023-05-06 12:18:21,638] root - INFO - Unique values of Sub_Classification: ['Pediatric', 'Adult', 'HIV test', 'HIV test - Ancillary', 'ACT', 'Malaria']
+Categories (6, object): ['ACT', 'Adult', 'HIV test', 'HIV test - Ancillary', 'Malaria',
+                         'Pediatric']
+[2023-05-06 12:18:21,638] root - INFO - Mapping for Fulfill_Via: {'From RDC': 0, 'Direct Drop': 1}
+[2023-05-06 12:18:21,639] root - INFO - Mapping for Shipment_Mode: {'Truck': 0, 'Air': 1, 'Ocean': 2, 'Air Charter': 3}
+[2023-05-06 12:18:21,639] root - INFO - Mapping for Product_Group: {'ARV': 0, 'HRDT': 1, 'ACT': 2, 'ANTM': 3, 'MRDT': 4}
+[2023-05-06 12:18:21,639] root - INFO - Mapping for Sub_Classification: {'Pediatric': 0, 'Adult': 1, 'HIV test': 2, 'HIV test - Ancillary': 3, 'ACT': 4, 'Malaria': 5}
+[2023-05-06 12:18:21,662] root - INFO - Data Wrangling Completed
+[2023-05-06 12:18:21,663] root - INFO - Columns after data wrangling:
+['Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price', 'Unit_Price', 'Freight_Cost_USD_Clean', 'Weight_Kilograms_Clean']
+[2023-05-06 12:18:21,685] root - INFO - Feature Enineering - Test Data 
+[2023-05-06 12:18:22,546] root - INFO - Weight and Freight Cost Data Clean Completed
+[2023-05-06 12:18:22,546] root - INFO - Columns Dropped
+[2023-05-06 12:18:22,546] root - INFO - Columns After dropping Index(['Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price',
+       'Unit_Price', 'Freight_Cost_USD_Clean', 'Weight_Kilograms_Clean'],
+      dtype='object')
+[2023-05-06 12:18:22,550] root - INFO - DataTypes of Columns After changing: 
+Fulfill_Via                   category
+Shipment_Mode                 category
+Product_Group                 category
+Sub_Classification            category
+Unit_of_Measure_(Per_Pack)     float64
+Line_Item_Quantity             float64
+Pack_Price                     float64
+Unit_Price                     float64
+Freight_Cost_USD_Clean         float64
+Weight_Kilograms_Clean         float64
+dtype: object
+[2023-05-06 12:18:22,550] root - INFO - Columns and DataTypes: 
+
+Fulfill_Via                   category
+Shipment_Mode                 category
+Product_Group                 category
+Sub_Classification            category
+Unit_of_Measure_(Per_Pack)     float64
+Line_Item_Quantity             float64
+Pack_Price                     float64
+Unit_Price                     float64
+Freight_Cost_USD_Clean         float64
+Weight_Kilograms_Clean         float64
+dtype: object
+[2023-05-06 12:18:22,550] root - INFO -  >>>>>>>>>>>>   Missing Fills :  Shipment_Mode,Manufacturing_Site,Country,Brand <<<<<<<<<<
+[2023-05-06 12:18:22,550] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
+[2023-05-06 12:18:22,551] root - INFO - Missing values in Unit_of_Measure_(Per_Pack) column have been imputed with median
+[2023-05-06 12:18:22,551] root - INFO - Missing values in Line_Item_Quantity column have been imputed with median
+[2023-05-06 12:18:22,552] root - INFO - Missing values in Pack_Price column have been imputed with median
+[2023-05-06 12:18:22,552] root - INFO - Missing values in Unit_Price column have been imputed with median
+[2023-05-06 12:18:22,552] root - INFO - Missing values in Weight_Kilograms_Clean column have been imputed with median
+[2023-05-06 12:18:22,552] root - INFO - Missing value imputation with median completed
+[2023-05-06 12:18:22,558] root - INFO - Columns encoding Index(['Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price',
+       'Unit_Price', 'Freight_Cost_USD_Clean', 'Weight_Kilograms_Clean'],
+      dtype='object')
+[2023-05-06 12:18:22,558] root - INFO - Unique values of Fulfill_Via: ['From RDC', 'Direct Drop']
+Categories (2, object): ['Direct Drop', 'From RDC']
+[2023-05-06 12:18:22,560] root - INFO - Unique values of Shipment_Mode: ['Truck', 'Air', 'Air Charter', 'Ocean']
+Categories (4, object): ['Air', 'Air Charter', 'Ocean', 'Truck']
+[2023-05-06 12:18:22,561] root - INFO - Unique values of Product_Group: ['ARV', 'HRDT', 'ANTM', 'ACT']
+Categories (4, object): ['ACT', 'ANTM', 'ARV', 'HRDT']
+[2023-05-06 12:18:22,562] root - INFO - Unique values of Sub_Classification: ['Adult', 'Pediatric', 'HIV test', 'HIV test - Ancillary', 'Malaria', 'ACT']
+Categories (6, object): ['ACT', 'Adult', 'HIV test', 'HIV test - Ancillary', 'Malaria',
+                         'Pediatric']
+[2023-05-06 12:18:22,562] root - INFO - Mapping for Fulfill_Via: {'From RDC': 0, 'Direct Drop': 1}
+[2023-05-06 12:18:22,562] root - INFO - Mapping for Shipment_Mode: {'Truck': 0, 'Air': 1, 'Air Charter': 2, 'Ocean': 3}
+[2023-05-06 12:18:22,562] root - INFO - Mapping for Product_Group: {'ARV': 0, 'HRDT': 1, 'ANTM': 2, 'ACT': 3}
+[2023-05-06 12:18:22,562] root - INFO - Mapping for Sub_Classification: {'Adult': 0, 'Pediatric': 1, 'HIV test': 2, 'HIV test - Ancillary': 3, 'Malaria': 4, 'ACT': 5}
+[2023-05-06 12:18:22,569] root - INFO - Data Wrangling Completed
+[2023-05-06 12:18:22,569] root - INFO - Columns after data wrangling:
+['Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price', 'Unit_Price', 'Freight_Cost_USD_Clean', 'Weight_Kilograms_Clean']
+[2023-05-06 12:18:22,574] root - INFO - Converting featured engineered array into dataframe.
+[2023-05-06 12:18:22,602] root - INFO - Splitting input and target feature from training and testing dataframe.
+[2023-05-06 12:18:22,603] root - INFO - Colums before transformer object Index(['Fulfill_Via', 'Shipment_Mode', 'Product_Group', 'Sub_Classification',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Pack_Price',
+       'Unit_Price', 'Weight_Kilograms_Clean'],
+      dtype='object')
+[2023-05-06 12:18:22,626] root - INFO - Obtaining preprocessing object.
+[2023-05-06 12:18:22,626] root - INFO - Creating Data Transformer Object
+[2023-05-06 12:18:22,626] root - INFO - Data Transformer Object created successfully
+[2023-05-06 12:18:22,626] root - INFO - Applying preprocessing object on training dataframe and testing dataframe
+[2023-05-06 12:18:22,688] root - INFO - Transformed Train and Transformed test file saved
+[2023-05-06 12:18:22,688] root - INFO - Saving Feature Engineering Object
+[2023-05-06 12:18:22,689] root - INFO - Saving Preprocessing Object
+[2023-05-06 12:18:22,692] root - INFO - Data Transformation Artifact: DataTransformationArtifact(is_transformed=True, message='Data transformation successfull.', transformed_train_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\transformed_data\\train\\transformed_train.csv', transformed_test_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\transformed_data\\test\\transformed_test.csv', preprocessed_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\preprocessed\\preprocessed.pkl', feature_engineering_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-12-18-14\\preprocessed\\feat_eng.pkl')
+[2023-05-06 12:18:22,694] root - INFO - 
+******************** Data Transformation log completed ********************
+
+
+[2023-05-06 12:18:22,694] root - INFO - Model Trainer Config : ModelTrainerConfig(trained_model_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\model_training\\2023-05-06-12-18-14\\trained_model\\model.pkl')
+[2023-05-06 12:18:22,694] root - INFO - 
+******************** Model Training started ********************
+
+
+[2023-05-06 12:18:22,694] root - INFO - Finding transformed Training and Test
+[2023-05-06 12:18:22,694] root - INFO - Transformed Data found!!! Now, converting it into dataframe
+[2023-05-06 12:18:22,716] root - INFO - Splitting Input features and Target Feature for train and test data
+[2023-05-06 12:18:22,763] root - INFO - Best Model Finder function called
+[2023-05-06 12:18:22,763] root - INFO - ******************** Training XGBoost Model ********************
+[2023-05-06 12:18:22,763] root - INFO - Getting Best Parameters for Random Forest by Grid Search CV
+[2023-05-06 12:18:22,763] root - INFO - Optuna Search for XG Boost best parameters started
+[2023-05-06 12:18:22,825] root - INFO - Optuna Search for XG Boost best parameters started
+[2023-05-06 12:18:23,041] root - INFO - Optuna Search for XG Boost best parameters started
+[2023-05-06 12:18:27,504] root - INFO - Optuna Search for XG Boost best parameters completed
+[2023-05-06 12:18:27,504] root - INFO - XGB Best Parameters : {'lambda': 1.6851088048838168, 'alpha': 0.0005647437904523172, 'colsample_bytree': 0.6, 'subsample': 0.8, 'learning_rate': 0.15, 'max_depth': 10, 'min_child_weight': 193, 'booster': 'gbtree', 'reg_lambda': 0.1, 'reg_alpha': 0.1}
+[2023-05-06 12:18:27,505] root - INFO - Fitting XG Boost model
+[2023-05-06 12:18:27,665] root - INFO - ******************** Trained XGBoost Model Successfully!! ********************
+[2023-05-06 12:18:27,665] root - INFO - ******************** Training Random Forest Model ********************
+[2023-05-06 12:18:27,665] root - INFO - Getting Best Parameters for Random Forest by Grid Search CV
+[2023-05-06 12:18:27,665] root - INFO - Grid Search for Random forest best parameters started
+[2023-05-06 12:21:56,911] root - INFO - Grid Search for Random forest best parameters completed
+[2023-05-06 12:21:56,911] root - INFO - RF Best Parameters : {'max_depth': 8, 'min_samples_split': 2, 'n_estimators': 150}
+[2023-05-06 12:21:56,911] root - INFO - Fitting random forest model
+[2023-05-06 12:21:58,546] root - INFO - ******************** Trained Random Forest Model Successfully!! ********************
+[2023-05-06 12:21:58,546] root - INFO - ***Objects for model obtained!!! Now calcalating R2 score for model evaluation***
+[2023-05-06 12:21:58,608] root - INFO - R2 score for Training set ---> Random Forest: 0.7545650689290911 || XG Boost: 0.5736594814828997
+[2023-05-06 12:21:58,608] root - INFO - R2 score for Training set --->  XG Boost: 0.5736594814828997
+[2023-05-06 12:21:58,630] root - INFO - R2 score for Testing set ---> Random Forest : 0.491203407693213 || XGBoost : 0.4139715942170872
+[2023-05-06 12:21:58,630] root - INFO - R2 score for Testing set --->  || XGBoost : 0.4139715942170872
+[2023-05-06 12:21:58,630] root - INFO - Random Forest Model Accepted!!!
+[2023-05-06 12:21:58,630] root - INFO - Saving best model object file
+[2023-05-06 12:21:58,714] root - INFO - Model Trainer Artifact: ModelTrainerArtifact(is_trained=True, message='Model Training Done!!', trained_model_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\model_training\\2023-05-06-12-18-14\\trained_model\\model.pkl')
+[2023-05-06 12:21:58,715] root - INFO - 
+******************** Model Training log completed ********************
+
+
