@@ -26,6 +26,7 @@ from sklearn import metrics
 import time
 import joblib
 from skopt import BayesSearchCV
+from matplotlib import pyplot as plt
 
 
 class ModelTrainer:
@@ -72,16 +73,33 @@ class ModelTrainer:
             n = X_test.shape[0]
             k = len(best_params)
 
+            # Get feature importances if applicable
+            try:
+                importances = model.feature_importances_
+            except AttributeError:
+                importances = None
+
             # Add the results to the list as a dictionary
             result_dict = {'Model': model_name, 'Best Parameters': str(best_params),
-                           'Mean Squared Error': mse, 'R2 Score': r2, 'Time Taken': elapsed_time_str}
+                        'Mean Squared Error': mse, 'R2 Score': r2, 'Time Taken': elapsed_time_str,
+                        'Feature Importances': importances}
             self.results.append(result_dict)
+
+            # Plot and save the feature importance if applicable
+            if importances is not None:
+                plt.bar(range(len(importances)), importances)
+                plt.xlabel('Features')
+                plt.ylabel('Importance')
+                plt.title(f'{model_name} Feature Importance')
+                plt.savefig(f'{model_name}_feature_importance.png')
 
             # Print the results for this model
             logging.info(f"******Results for********* {model_name}:")
             logging.info(f"Best hyperparameters: {best_params}")
             logging.info(f"Mean squared error: {mse:.4f}")
             logging.info(f"R2 score: {r2:.4f}")
+            if importances is not None:
+                logging.info(f"Feature importances: {importances}")
             logging.info(f"Time taken: {elapsed_time_str}\n")
 
         # Create a DataFrame from the list of dicts
