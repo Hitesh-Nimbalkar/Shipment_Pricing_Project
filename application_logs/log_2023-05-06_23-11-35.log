@@ -1,0 +1,166 @@
+[2023-05-06 23:11:39,874] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact')
+[2023-05-06 23:11:39,874] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-23-11-35\\raw_data', ingested_train_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-23-11-35\\ingested_data\\train', ingested_test_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-23-11-35\\ingested_data\\test')
+[2023-05-06 23:11:39,874] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-06 23:11:39,874] root - INFO - Downloading file from :[https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv] into :[C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-23-11-35\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 23:11:41,627] root - INFO - File :[C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-23-11-35\raw_data\SCMS_Delivery_History_Dataset.csv] has been downloaded successfully.
+[2023-05-06 23:11:41,627] root - INFO - Reading csv file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-23-11-35\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 23:11:41,679] root - INFO - Splitting data into train and test
+[2023-05-06 23:11:41,683] root - INFO - Exporting training dataset to file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-23-11-35\ingested_data\train\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 23:11:41,756] root - INFO - Exporting test dataset to file: [C:\Users\Admin\Documents\Shipment_pricing_Project\shipment\artifact\data_ingestion\2023-05-06-23-11-35\ingested_data\test\SCMS_Delivery_History_Dataset.csv]
+[2023-05-06 23:11:41,775] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-23-11-35\\ingested_data\\train\\SCMS_Delivery_History_Dataset.csv', test_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-06-23-11-35\\ingested_data\\test\\SCMS_Delivery_History_Dataset.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-05-06 23:11:41,777] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-06 23:11:41,788] root - INFO - Validation Process Started
+[2023-05-06 23:11:41,973] root - INFO - Train_set status|is Train filename validated?: True|is train column name validated?: True|whole missing columns?True
+[2023-05-06 23:11:41,973] root - INFO - Test_set status|is Test filename validated?: True|is test column names validated? True| whole missing columns? True
+[2023-05-06 23:11:41,973] root - INFO - Validation Process Completed
+[2023-05-06 23:11:41,973] root - INFO - Data validation artifact: DataValidationArtifact(schema_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\config\\schema.yaml', is_validated=True, message='Data validation performed')
+[2023-05-06 23:11:41,973] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log completed.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+[2023-05-06 23:11:41,973] root - INFO - Data Transformation Config: DataTransformationConfig(transformed_train_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\transformed_data\\train', transformed_test_dir='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\transformed_data\\test', preprocessed_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\preprocessed\\preprocessed.pkl', feature_engineering_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\preprocessed\\feat_eng.pkl')
+[2023-05-06 23:11:41,973] root - INFO - 
+******************** Data Transformation log started ********************
+
+
+[2023-05-06 23:11:41,973] root - INFO - Obtaining training and test file path.
+[2023-05-06 23:11:41,973] root - INFO - Loading training and test data as pandas dataframe.
+[2023-05-06 23:11:42,030] root - INFO - Extracting train column name ['ID', 'Project_Code', 'PQ', 'PO/SO', 'ASN/DN', 'Country', 'Managed_By', 'Fulfill_Via', 'Vendor_INCO_Term', 'Shipment_Mode', 'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date', 'Scheduled_Delivery_Date', 'Delivered_to_Client_Date', 'Delivery_Recorded_Date', 'Product_Group', 'Sub_Classification', 'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Brand', 'Dosage', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Line_Item_Value', 'Pack_Price', 'Unit_Price', 'Manufacturing_Site', 'First_Line_Designation', 'Weight_(Kilograms)', 'Freight_Cost_(USD)', 'Line_Item_Insurance_(USD)']
+[2023-05-06 23:11:42,030] root - INFO - Obtaining feature engineering object.
+[2023-05-06 23:11:42,031] root - INFO - 
+******************** Feature Engneering Started ********************
+
+
+[2023-05-06 23:11:42,031] root - INFO - Applying feature engineering object on training dataframe and testing dataframe
+[2023-05-06 23:11:42,031] root - INFO - Feature Enineering - Train Data 
+[2023-05-06 23:11:45,593] root - INFO - Weight and Freight Cost Data Clean Completed
+[2023-05-06 23:11:45,595] root - INFO - 
+
+[2023-05-06 23:11:45,595] root - INFO - Country
+[2023-05-06 23:11:45,595] root - INFO - Fulfill_Via
+[2023-05-06 23:11:45,595] root - INFO - Shipment_Mode
+[2023-05-06 23:11:45,595] root - INFO - Sub_Classification
+[2023-05-06 23:11:45,596] root - INFO - Brand
+[2023-05-06 23:11:45,596] root - INFO - Dosage_Form
+[2023-05-06 23:11:45,596] root - INFO - Unit_of_Measure_(Per_Pack)
+[2023-05-06 23:11:45,596] root - INFO - Line_Item_Quantity
+[2023-05-06 23:11:45,596] root - INFO - Pack_Price
+[2023-05-06 23:11:45,596] root - INFO - Unit_Price
+[2023-05-06 23:11:45,596] root - INFO - First_Line_Designation
+[2023-05-06 23:11:45,596] root - INFO - Freight_Cost_USD_Clean
+[2023-05-06 23:11:45,596] root - INFO - Weight_Kilograms_Clean
+[2023-05-06 23:11:45,596] root - INFO - Drop Columns Complete
+[2023-05-06 23:11:45,653] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
+[2023-05-06 23:11:45,653] root - INFO - Outlier Detection
+[2023-05-06 23:11:45,672] root - INFO - Outlier Detection Complete
+[2023-05-06 23:11:45,672] root - INFO - Columnsof data after data wrangling:Index(['Country', 'Fulfill_Via', 'Shipment_Mode', 'Sub_Classification',
+       'Brand', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)',
+       'Line_Item_Quantity', 'Pack_Price', 'Unit_Price',
+       'First_Line_Designation', 'Freight_Cost_USD_Clean',
+       'Weight_Kilograms_Clean'],
+      dtype='object')
+[2023-05-06 23:11:45,696] root - INFO - Data Modified  Completed and Saved 
+[2023-05-06 23:11:45,696] root - INFO - New Column Order ['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Fulfill_Via', 'Shipment_Mode', 'Country', 'Sub_Classification', 'Dosage_Form', 'First_Line_Designation', 'Freight_Cost_USD_Clean']
+[2023-05-06 23:11:45,699] root - INFO - Datatypes : Pack_Price                    float64
+Unit_Price                    float64
+Weight_Kilograms_Clean        float64
+Unit_of_Measure_(Per_Pack)      int64
+Line_Item_Quantity              int64
+Fulfill_Via                    object
+Shipment_Mode                  object
+Country                        object
+Sub_Classification             object
+Dosage_Form                    object
+First_Line_Designation         object
+Freight_Cost_USD_Clean        float64
+dtype: object
+[2023-05-06 23:11:45,721] root - INFO - Columns : Index(['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Fulfill_Via',
+       'Shipment_Mode', 'Country', 'Sub_Classification', 'Dosage_Form',
+       'First_Line_Designation', 'Freight_Cost_USD_Clean'],
+      dtype='object')
+[2023-05-06 23:11:45,722] root - INFO - Feature Enineering - Test Data 
+[2023-05-06 23:11:46,575] root - INFO - Weight and Freight Cost Data Clean Completed
+[2023-05-06 23:11:46,575] root - INFO - 
+
+[2023-05-06 23:11:46,576] root - INFO - Country
+[2023-05-06 23:11:46,576] root - INFO - Fulfill_Via
+[2023-05-06 23:11:46,576] root - INFO - Shipment_Mode
+[2023-05-06 23:11:46,576] root - INFO - Sub_Classification
+[2023-05-06 23:11:46,576] root - INFO - Brand
+[2023-05-06 23:11:46,576] root - INFO - Dosage_Form
+[2023-05-06 23:11:46,576] root - INFO - Unit_of_Measure_(Per_Pack)
+[2023-05-06 23:11:46,576] root - INFO - Line_Item_Quantity
+[2023-05-06 23:11:46,576] root - INFO - Pack_Price
+[2023-05-06 23:11:46,576] root - INFO - Unit_Price
+[2023-05-06 23:11:46,576] root - INFO - First_Line_Designation
+[2023-05-06 23:11:46,576] root - INFO - Freight_Cost_USD_Clean
+[2023-05-06 23:11:46,576] root - INFO - Weight_Kilograms_Clean
+[2023-05-06 23:11:46,576] root - INFO - Drop Columns Complete
+[2023-05-06 23:11:46,593] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
+[2023-05-06 23:11:46,593] root - INFO - Outlier Detection
+[2023-05-06 23:11:46,619] root - INFO - Outlier Detection Complete
+[2023-05-06 23:11:46,620] root - INFO - Columnsof data after data wrangling:Index(['Country', 'Fulfill_Via', 'Shipment_Mode', 'Sub_Classification',
+       'Brand', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)',
+       'Line_Item_Quantity', 'Pack_Price', 'Unit_Price',
+       'First_Line_Designation', 'Freight_Cost_USD_Clean',
+       'Weight_Kilograms_Clean'],
+      dtype='object')
+[2023-05-06 23:11:46,630] root - INFO - Data Modified  Completed and Saved 
+[2023-05-06 23:11:46,630] root - INFO - New Column Order ['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Fulfill_Via', 'Shipment_Mode', 'Country', 'Sub_Classification', 'Dosage_Form', 'First_Line_Designation', 'Freight_Cost_USD_Clean']
+[2023-05-06 23:11:46,632] root - INFO - Datatypes : Pack_Price                    float64
+Unit_Price                    float64
+Weight_Kilograms_Clean        float64
+Unit_of_Measure_(Per_Pack)      int64
+Line_Item_Quantity              int64
+Fulfill_Via                    object
+Shipment_Mode                  object
+Country                        object
+Sub_Classification             object
+Dosage_Form                    object
+First_Line_Designation         object
+Freight_Cost_USD_Clean        float64
+dtype: object
+[2023-05-06 23:11:46,640] root - INFO - Columns : Index(['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Fulfill_Via',
+       'Shipment_Mode', 'Country', 'Sub_Classification', 'Dosage_Form',
+       'First_Line_Designation', 'Freight_Cost_USD_Clean'],
+      dtype='object')
+[2023-05-06 23:11:46,641] root - INFO - Converting featured engineered array into dataframe.
+[2023-05-06 23:11:46,641] root - INFO - Columns for Feature Engineering : ['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Fulfill_Via', 'Shipment_Mode', 'Country', 'Sub_Classification', 'Dosage_Form', 'First_Line_Designation', 'Freight_Cost_USD_Clean']
+[2023-05-06 23:11:46,641] root - INFO - Feature Engineering - Train Completed
+[2023-05-06 23:11:46,642] root - INFO - Saving feature engineered training and testing dataframe.
+[2023-05-06 23:11:46,667] root - INFO - Splitting input and target feature from training and testing dataframe.
+[2023-05-06 23:11:46,687] root - INFO - Obtaining preprocessing object.
+[2023-05-06 23:11:46,687] root - INFO - Creating Data Transformer Object
+[2023-05-06 23:11:46,687] root - INFO - Applying preprocessing object on training dataframe and testing dataframe
+[2023-05-06 23:11:46,724] root - INFO - Converting preprocessed array into dataframe.
+[2023-05-06 23:11:46,725] root - INFO - Saving Transformed Train and Transformed test file
+[2023-05-06 23:11:46,807] root - INFO - Transformed Train and Transformed test file saved
+[2023-05-06 23:11:46,807] root - INFO - Saving Feature Engineering Object
+[2023-05-06 23:11:46,808] root - INFO - Saving Preprocessing Object
+[2023-05-06 23:11:46,812] root - INFO - Data Transformation Artifact: DataTransformationArtifact(is_transformed=True, message='Data transformation successfull.', transformed_train_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\transformed_data\\train\\transformed_train.csv', transformed_test_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\transformed_data\\test\\transformed_test.csv', preprocessed_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\preprocessed\\preprocessed.pkl', feature_engineering_object_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\data_transformation\\2023-05-06-23-11-35\\preprocessed\\feat_eng.pkl')
+[2023-05-06 23:11:46,816] root - INFO - 
+******************** Data Transformation log completed ********************
+
+
+[2023-05-06 23:11:46,816] root - INFO - Model Trainer Config : ModelTrainerConfig(trained_model_file_path='C:\\Users\\Admin\\Documents\\Shipment_pricing_Project\\shipment\\artifact\\model_training\\2023-05-06-23-11-35\\trained_model\\model.pkl')
+[2023-05-06 23:11:46,816] root - INFO - 
+******************** Model Training started ********************
+
+
+[2023-05-06 23:11:46,816] root - INFO - Finding transformed Training and Test
+[2023-05-06 23:11:46,816] root - INFO - Transformed Data found!!! Now, converting it into dataframe
+[2023-05-06 23:11:46,862] root - INFO - Splitting Input features and Target Feature for train and test data
+[2023-05-06 23:11:46,863] root - INFO - Best Model Finder function called
+[2023-05-06 23:11:46,863] root - INFO - ******************** Training XGBoost Model ********************
+[2023-05-06 23:11:46,863] root - INFO - Getting Best Parameters for Random Forest by Grid Search CV
+[2023-05-06 23:11:46,863] root - INFO - Optuna Search for XG Boost best parameters started
+[2023-05-06 23:11:53,930] root - INFO - Optuna Search for XG Boost best parameters completed
+[2023-05-06 23:11:53,931] root - INFO - XGB Best Parameters : {'lambda': 0.0002305732411368258, 'alpha': 0.00011274285703767696, 'colsample_bytree': 0.9, 'subsample': 0.8, 'learning_rate': 0.2, 'max_depth': 8, 'min_child_weight': 10, 'booster': 'dart', 'reg_lambda': 0.05, 'reg_alpha': 0.05, 'gamma': 3.625769910981741, 'eta': 3.623727857372323}
+[2023-05-06 23:11:53,931] root - INFO - Fitting XG Boost model
+[2023-05-06 23:11:54,865] root - INFO - ******************** Trained XGBoost Model Successfully!! ********************
+[2023-05-06 23:11:54,865] root - INFO - ******************** Training Random Forest Model ********************
+[2023-05-06 23:11:54,865] root - INFO - Getting Best Parameters for Random Forest by Grid Search CV
+[2023-05-06 23:11:54,865] root - INFO - Grid Search for Random Forest best parameters started

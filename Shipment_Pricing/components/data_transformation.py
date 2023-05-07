@@ -40,7 +40,7 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
                         Encode_Features.append(col)
                         
             
-            x.to_csv('Before_Encoding.csv', index=False)
+            # x.to_csv('Before_Encoding.csv', index=False)
             logging.info(f"Columns before encoding: {x.columns}")
             
             # Print information about each feature to be encoded
@@ -60,8 +60,7 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
             # Use the mapping to encode each feature and add encoded values to dataframe
             for feature in Encode_Features:
                 encoded_values = x[feature].map(mapping[feature])
-                x[f"{feature}"] = encoded_values
-            x.to_csv("Encoded_data.csv", index=False)    
+                x[f"{feature}"] = encoded_values  
             
             return x
 
@@ -130,29 +129,13 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
                             'Scheduled_Delivery_Date', 'Delivered_to_Client_Date',
                             'Delivery_Recorded_Date', 'Product_Group','Line_Item_Value',
                             'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Dosage',
-                            'Weight_(Kilograms)', 'Freight_Cost_(USD)','Line_Item_Insurance_(USD)']
+                            'Weight_(Kilograms)', 'Freight_Cost_(USD)','Line_Item_Insurance_(USD)','Manufacturing_Site','Unit_of_Measure_(Per_Pack)','Dosage_Form']
 
             # drop the specified columns from x
             x.drop(columns=columns_to_drop, inplace=True)
 
-            # print remaining columns for user selection
-            logging.info("\n")
-            print('Remaining columns:')
-            for col in x.columns:
-                logging.info(col)
+          
 
-            # user selects which columns to drop
-            user_selection = input('\nEnter the name(s) of the column(s) you would like to drop (comma-separated): ')
-
-            # convert user's selections to a list
-            user_selection_list = [col.strip() for col in user_selection.split(',')]
-
-            # drop selected columns
-            x.drop(columns=user_selection_list, inplace=True)
-
-            # display final DataFrame
-            logging.info('\nFinal DataFrame:')
-            logging.info(x.head())
             
             logging.info("Drop Columns Complete")
             
@@ -326,15 +309,14 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
             
             data = self.outlier(data)
             
-            logging.info(f'Columnsof data after data wrangling:{data.columns}')
             
             
 
-                # Perform map encoding
-            #data = self.Map_encoding(data)
+            # Perform map encoding
+            data = self.Map_encoding(data)
            
 
-            data.to_csv("data_modiefied.csv",index=False)
+            #data.to_csv("data_modiefied.csv",index=False)
             logging.info('Data Modified  Completed and Saved ')
             
             return data
@@ -353,9 +335,9 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
             
             
 
-            new_col_order =['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean','Unit_of_Measure_(Per_Pack)',
-       'Line_Item_Quantity','Fulfill_Via', 'Shipment_Mode','Country',
-       'Sub_Classification', 'Dosage_Form',  'First_Line_Designation','Freight_Cost_USD_Clean']
+            new_col_order =['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
+       'Line_Item_Quantity','Fulfill_Via', 'Shipment_Mode','Country','Brand',
+       'Sub_Classification',  'First_Line_Designation','Freight_Cost_USD_Clean']
             print("\n")
             logging.info(f"New Column Order {new_col_order}")
             print("\n")
@@ -406,10 +388,10 @@ class DataTransformation:
             
             # Define the numerical and categorical columns in your dataset
             numerical_columns = ['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
-                                'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity']
+                                 'Line_Item_Quantity']
             
-            categorical_columns = ['Fulfill_Via', 'Shipment_Mode', 'Country',
-                                'Sub_Classification', 'Dosage_Form', 'First_Line_Designation']
+            categorical_columns = ['Fulfill_Via', 'Shipment_Mode', 'Country','Brand',
+                                'Sub_Classification',  'First_Line_Designation']
 
             # Define transformers for numerical and categorical columns
             num_transformer = Pipeline(steps=[
@@ -418,8 +400,7 @@ class DataTransformation:
             ])
 
             cat_transformer = Pipeline(steps=[
-                ('imputer', SimpleImputer(strategy='most_frequent')),
-                ('onehot', OneHotEncoder(handle_unknown='ignore',sparse=False))
+                ('imputer', SimpleImputer(strategy='most_frequent'))
             ])
 
             # Combine the transformers using ColumnTransformer
@@ -479,9 +460,9 @@ class DataTransformation:
             # Converting featured engineered array into dataframe
             logging.info(f"Converting featured engineered array into dataframe.")
 
-            col =['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean','Unit_of_Measure_(Per_Pack)',
-                'Line_Item_Quantity','Fulfill_Via', 'Shipment_Mode','Country',
-                'Sub_Classification', 'Dosage_Form',  'First_Line_Designation','Freight_Cost_USD_Clean']
+            col =['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
+                'Line_Item_Quantity','Fulfill_Via', 'Shipment_Mode','Country','Brand',
+                'Sub_Classification',  'First_Line_Designation','Freight_Cost_USD_Clean']
             
             logging.info(f"Columns for Feature Engineering : {col}")
             feature_eng_train_df = pd.DataFrame(feature_eng_train_arr,columns=col)
@@ -489,33 +470,37 @@ class DataTransformation:
             feature_eng_test_df = pd.DataFrame(feature_eng_test_arr,columns=col)
             
             logging.info(f"Saving feature engineered training and testing dataframe.")
-            feature_eng_train_df.to_csv('feature_eng_train_df.csv',index=False)
+            #feature_eng_train_df.to_csv('feature_eng_train_df.csv',index=False)
 
+           
+            # Tran and TEst Dataframe
             target_column_name='Freight_Cost_USD_Clean'
+
+            target_feature_train_df = feature_eng_train_df[target_column_name]
+            input_feature_train_df = feature_eng_train_df.drop(columns = target_column_name,axis = 1)
+             
+            target_feature_test_df = feature_eng_test_df[target_column_name]
+            input_feature_test_df = feature_eng_test_df.drop(columns = target_column_name,axis = 1)
             
-            # Train Dataframe 
-            logging.info(f"Splitting input and target feature from training and testing dataframe.")
-            input_feature_train_df = feature_eng_train_df
-            input_feature_train_df.to_csv('input_feature_train_df.csv',index=False)
-            # Test Dataframe 
-            input_feature_test_df = feature_eng_test_df
+            #input_feature_train_df.to_csv('input_feature_train_df.csv',index=False)
+  
             
             
             ## Preprocessing 
 
-            logging.info(f"Obtaining preprocessing object.")
-            preprocessing_obj = self.get_data_transformer_object()
             logging.info(f"Applying preprocessing object on training dataframe and testing dataframe")
+            preprocessing_obj = self.get_data_transformer_object()
+           
             
+            col =['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean',
+                'Line_Item_Quantity','Fulfill_Via', 'Shipment_Mode','Country','Brand',
+                'Sub_Classification',   'First_Line_Designation']
+
             train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             test_arr = preprocessing_obj.transform(input_feature_test_df)
-            
-            # Get the list of column names for the preprocessed data
-            preprocessed_columns = preprocessing_obj.get_feature_names_out()
-            
-            logging.info(f"Converting preprocessed array into dataframe.")
-            transformed_train_df = pd.DataFrame(train_arr,columns=preprocessed_columns)
-            transformed_test_df = pd.DataFrame(test_arr,columns=preprocessed_columns)
+
+            transformed_train_df = pd.DataFrame(np.c_[train_arr,np.array(target_feature_train_df)],columns=col+[target_column_name])
+            transformed_test_df = pd.DataFrame(np.c_[test_arr,np.array(target_feature_test_df)],columns=col+[target_column_name])
 
             
         
