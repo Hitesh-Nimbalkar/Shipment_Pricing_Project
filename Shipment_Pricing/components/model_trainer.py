@@ -91,8 +91,12 @@ class ModelTrainer:
                 plt.xlabel('Features')
                 plt.ylabel('Importance')
                 plt.title(f'{model_name} Feature Importance')
-                plt.savefig(f'{model_name}_feature_importance.png')
+                # save the plot in the specified directory
+                # save the plot in the specified directory
+                file_name = f"{model_name}_feature_importance.png"
+                file_path = os.path.join("C:", os.sep, "Users", "Admin", "Documents", "Shipment_pricing_Project", "prediction_files", file_name)
 
+                plt.savefig(file_path)
             # Print the results for this model
             logging.info(f"******Results for********* {model_name}:")
             logging.info(f"Best hyperparameters: {best_params}")

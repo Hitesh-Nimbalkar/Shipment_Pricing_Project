@@ -3,6 +3,12 @@ import numpy as np
 import pandas as pd
 import joblib
 import pickle
+from PIL import Image
+import base64
+
+# Call set_page_config() as the first Streamlit command in your script
+st.set_page_config(page_title="My App", layout="centered", initial_sidebar_state="expanded")
+
 
 # Define mappings
 COUNTRY_MAP = {'Zambia': 0, 'Ethiopia': 1, 'Nigeria': 2, 'Tanzania': 3, "C�te d'Ivoire": 4, 'Mozambique': 5, 'Others': 6, 'Zimbabwe': 7, 'South Africa': 8, 'Rwanda': 9, 'Haiti': 10, 'Vietnam': 11, 'Uganda': 12}
@@ -16,7 +22,77 @@ FIRST_LINE_DESIGNATION_MAP = {'Yes': 0, 'No': 1}
 
 # Define the Streamlit app
 def app():
-    st.title('Shipment Price Prediction App')
+    # Set background color and image
+    st.markdown(
+        f"""
+        <style>
+        .reportview-container {{
+            background: url(r'C:/Users/Admin/Documents/Shipment_pricing_Project/templatesbackground.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Add CSS styling for the app title
+    st.markdown(
+        f"""
+        <style>
+        .title {{
+            font-size: 48px !important;
+            color: white !important;
+            text-shadow: black 0px 2px 4px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Add CSS styling for the form labels and inputs
+    st.markdown(
+        f"""
+        <style>
+        label {{
+            color: white !important;
+            font-size: 24px !important;
+            text-shadow: black 0px 2px 4px;
+        }}
+        input {{
+            font-size: 24px !important;
+            padding: 10px !important;
+            border-radius: 5px !important;
+        }}
+        select {{
+            font-size: 24px !important;
+            padding: 10px !important;
+            border-radius: 5px !important;
+        }}
+        button {{
+            font-size: 24px !important;
+            padding: 10px !important;
+            border-radius: 5px !important;
+            background-color: #44aaff !important;
+            color: white !important;
+            text-shadow: black 0px 2px 4px;
+            margin-top: 20px !important;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Set the app title
+    st.markdown("<h1 class='title'>Shipment Price Prediction App</h1>", unsafe_allow_html=True)
+
+
+
+
 
 # Collect user input
     pack_price = st.number_input('Pack Price')
