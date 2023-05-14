@@ -12,6 +12,8 @@ CONFIG_DIR = "config"
 CONFIG_FILE_NAME = "config.yaml"
 CONFIG_FILE_PATH = os.path.join(ROOT_DIR,CONFIG_DIR,CONFIG_FILE_NAME)
 
+#File Name 
+FILE_NAME = 'SCMS_Delivery_History_Dataset.csv'
 
 # Data Ingestion related variable
 DATA_INGESTION_CONFIG_KEY = "data_ingestion_config"
@@ -21,6 +23,7 @@ DATA_INGESTION_RAW_DATA_DIR_KEY = "raw_data_dir"
 DATA_INGESTION_INGESTED_DIR_NAME_KEY = "ingested_dir"
 DATA_INGESTION_TRAIN_DIR_KEY = "ingested_train_dir"
 DATA_INGESTION_TEST_DIR_KEY = "ingested_test_dir"
+CONFIG_FILE_KEY = "config"
 
 # Training pipeline related variable
 TRAINING_PIPELINE_CONFIG_KEY = "training_pipeline_config"

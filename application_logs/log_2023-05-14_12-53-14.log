@@ -1,0 +1,73 @@
+[2023-05-14 12:53:15,197] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact')
+[2023-05-14 12:53:15,197] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-53-14\\raw_data', ingested_train_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-53-14\\ingested_data\\train', ingested_test_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-53-14\\ingested_data\\test')
+[2023-05-14 12:53:15,198] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-14 12:53:15,198] root - INFO - Downloading file from Mongo DB into :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-53-14\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:53:15,941] root - INFO - File :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-53-14\raw_data\SCMS_Delivery_History_Dataset.csv] has been downloaded successfully.
+[2023-05-14 12:53:15,941] root - INFO - Reading csv file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-53-14\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:53:16,073] root - INFO - Splitting data into train and test
+[2023-05-14 12:53:16,094] root - INFO - Exporting training dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-53-14\ingested_data\train\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:53:16,375] root - INFO - Exporting test dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-53-14\ingested_data\test\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:53:16,446] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-53-14\\ingested_data\\train\\SCMS_Delivery_History_Dataset.csv', test_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-53-14\\ingested_data\\test\\SCMS_Delivery_History_Dataset.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-05-14 12:53:16,453] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-14 12:53:16,460] root - INFO - Validation Process Started
+[2023-05-14 12:53:16,573] root - INFO - Column Names Index(['_id', 'ID', 'Project Code', 'PQ #', 'PO / SO #', 'ASN/DN #', 'Country',
+       'Managed By', 'Fulfill Via', 'Vendor INCO Term', 'Shipment Mode',
+       'PQ First Sent to Client Date', 'PO Sent to Vendor Date',
+       'Scheduled Delivery Date', 'Delivered to Client Date',
+       'Delivery Recorded Date', 'Product Group', 'Sub Classification',
+       'Vendor', 'Item Description', 'Molecule/Test Type', 'Brand', 'Dosage',
+       'Dosage Form', 'Unit of Measure (Per Pack)', 'Line Item Quantity',
+       'Line Item Value', 'Pack Price', 'Unit Price', 'Manufacturing Site',
+       'First Line Designation', 'Weight (Kilograms)', 'Freight Cost (USD)',
+       'Line Item Insurance (USD)', 'Project_Code', 'PO/SO', 'ASN/DN',
+       'Managed_By', 'Fulfill_Via', 'Vendor_INCO Term', 'Shipment_Mode',
+       'PQ_First_Sent_to_Client_Date', 'Scheduled_Delivery_Date',
+       'Delivered_to_Client_Date', 'Delivery_Recorded_Date', 'Product_Group',
+       'Sub_Classification', 'Item_Description', 'Dosage_Form',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Line_Item_Value',
+       'Pack_Price', 'Unit_Price', 'Manufacturing_Site',
+       'First_Line_Designation', 'Weight_(Kilograms)', 'Freight_Cost (USD)',
+       'Line_Item_Insurance (USD)'],
+      dtype='object')
+[2023-05-14 12:53:16,573] root - INFO - Schema colum Data ['ID', 'Project_Code', 'PQ', 'PO/SO', 'ASN/DN', 'Country', 'Managed_By', 'Fulfill_Via', 'Vendor_INCO_Term', 'Shipment_Mode', 'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date', 'Scheduled_Delivery_Date', 'Delivered_to_Client_Date', 'Delivery_Recorded_Date', 'Product_Group', 'Sub_Classification', 'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Brand', 'Dosage', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Line_Item_Value', 'Pack_Price', 'Unit_Price', 'Manufacturing_Site', 'First_Line_Designation', 'Weight_(Kilograms)', 'Freight_Cost_(USD)', 'Line_Item_Insurance_(USD)']
+[2023-05-14 12:53:16,935] root - INFO - Column Names Index(['_id', 'ID', 'Project Code', 'PQ #', 'PO / SO #', 'ASN/DN #', 'Country',
+       'Managed By', 'Fulfill Via', 'Vendor INCO Term', 'Shipment Mode',
+       'PQ First Sent to Client Date', 'PO Sent to Vendor Date',
+       'Scheduled Delivery Date', 'Delivered to Client Date',
+       'Delivery Recorded Date', 'Product Group', 'Sub Classification',
+       'Vendor', 'Item Description', 'Molecule/Test Type', 'Brand', 'Dosage',
+       'Dosage Form', 'Unit of Measure (Per Pack)', 'Line Item Quantity',
+       'Line Item Value', 'Pack Price', 'Unit Price', 'Manufacturing Site',
+       'First Line Designation', 'Weight (Kilograms)', 'Freight Cost (USD)',
+       'Line Item Insurance (USD)', 'Project_Code', 'PO/SO', 'ASN/DN',
+       'Managed_By', 'Fulfill_Via', 'Vendor_INCO Term', 'Shipment_Mode',
+       'PQ_First_Sent_to_Client_Date', 'Scheduled_Delivery_Date',
+       'Delivered_to_Client_Date', 'Delivery_Recorded_Date', 'Product_Group',
+       'Sub_Classification', 'Item_Description', 'Dosage_Form',
+       'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Line_Item_Value',
+       'Pack_Price', 'Unit_Price', 'Manufacturing_Site',
+       'First_Line_Designation', 'Weight_(Kilograms)', 'Freight_Cost (USD)',
+       'Line_Item_Insurance (USD)'],
+      dtype='object')
+[2023-05-14 12:53:16,935] root - INFO - Schema colum Data ['ID', 'Project_Code', 'PQ', 'PO/SO', 'ASN/DN', 'Country', 'Managed_By', 'Fulfill_Via', 'Vendor_INCO_Term', 'Shipment_Mode', 'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date', 'Scheduled_Delivery_Date', 'Delivered_to_Client_Date', 'Delivery_Recorded_Date', 'Product_Group', 'Sub_Classification', 'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Brand', 'Dosage', 'Dosage_Form', 'Unit_of_Measure_(Per_Pack)', 'Line_Item_Quantity', 'Line_Item_Value', 'Pack_Price', 'Unit_Price', 'Manufacturing_Site', 'First_Line_Designation', 'Weight_(Kilograms)', 'Freight_Cost_(USD)', 'Line_Item_Insurance_(USD)']
+[2023-05-14 12:53:17,028] root - INFO - Train_set status|is Train filename validated?: True|is train column name validated?: False|whole missing columns?True
+[2023-05-14 12:53:17,028] root - INFO - Test_set status|is Test filename validated?: True|is test column names validated? False| whole missing columns? True
+[2023-05-14 12:53:17,028] root - INFO - Check yout Training Data! Validation Failed
+[2023-05-14 12:53:17,028] root - ERROR - 
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [88] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [45] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\components\data_validation.py] at 
+        line number: [113] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\components\data_validation.py] at 
+        line number: [88] 
+        error message: [Check your Training data! Validation failed]]]]
+[2023-05-14 12:53:17,030] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log completed.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

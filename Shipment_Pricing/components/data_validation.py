@@ -73,6 +73,7 @@ class DataValidation:
                 is_test_missing_values_whole_column = self.test_data.missing_values_whole_column()
 
                 self.test_data.replace_null_values_with_null()
+                
 
                 logging.info(
                     f"Train_set status|is Train filename validated?: {is_train_filename_validated}|is train column name validated?: {is_train_column_name_same}|whole missing columns?{is_train_missing_values_whole_column}")

@@ -7,12 +7,12 @@ from Shipment_Pricing.constant import *
 from Shipment_Pricing.logger import logging
 from Shipment_Pricing.entity.config_entity import DataIngestionConfig
 from Shipment_Pricing.entity.artifact_entity import DataIngestionArtifact
-from Shipment_Pricing.config.configuration import Configuration
+from Shipment_Pricing.data_access.Mongo_Data import mongodata
 from Shipment_Pricing.exception import ApplicationException
 from Shipment_Pricing.utils.utils import read_yaml_file
 from sklearn.model_selection import train_test_split
 from datetime import date
-            
+from Shipment_Pricing.constant.database import DATABASE_NAME,COLLECTION_NAME
 
 
 class DataIngestion:
@@ -25,27 +25,36 @@ class DataIngestion:
         except Exception as e:
             raise ApplicationException(e, sys) from e
 
-    def download_data(self) -> str:
+    def get_data_from_mongo_DB(self) -> str:
         try:
-            download_url = self.data_ingestion_config.dataset_download_url
-
+            
+            # Raw Data Directory Path
             raw_data_dir = self.data_ingestion_config.raw_data_dir
-
+            
+            # Make Raw data Directory
             os.makedirs(raw_data_dir, exist_ok=True)
 
-            shipment_file_name = os.path.basename(download_url)
+            shipment_file_name = FILE_NAME
 
             raw_file_path = os.path.join(raw_data_dir, shipment_file_name)
 
             logging.info(
-                f"Downloading file from :[{download_url}] into :[{raw_file_path}]")
-            urllib.request.urlretrieve(download_url, raw_file_path)
+                f"Downloading file from Mongo DB into :[{raw_file_path}]")
+            
+            data=mongodata()
+            # Storing mongo data ccs file to raw directoy 
+            data.export_collection_as_csv(collection_name=COLLECTION_NAME,database_name=DATABASE_NAME,file_path=raw_file_path)
+            
             logging.info(
                 f"File :[{raw_file_path}] has been downloaded successfully.")
             return raw_file_path
 
         except Exception as e:
             raise ApplicationException(e, sys) from e
+        
+   
+        
+        
         
     def split_data_as_train_test(self) -> DataIngestionArtifact:
         try:
@@ -58,18 +67,7 @@ class DataIngestion:
             logging.info(f"Reading csv file: [{shipment_file_path}]")
 
             shipment_df  = pd.read_csv(shipment_file_path)
-            # creating the date object of today's date
-            '''
-            todays_date = date.today()
-            current_year= todays_date.year
-            
-            us_visa_dataframe = pd.read_csv(us_visa_file_path)
-            
-            us_visa_dataframe[COLUMN_COMPANY_AGE] = current_year-us_visa_dataframe[COLUMN_YEAR_ESTB]
-            
-            us_visa_dataframe.drop([COLUMN_ID,COLUMN_YEAR_ESTB], axis=1, inplace=True)
-            us_visa_dataframe[COLUMN_CASE_STATUS] = np.where(us_visa_dataframe[COLUMN_CASE_STATUS] == 'Denied', 1,0)
-                        '''
+
             logging.info(f"Splitting data into train and test")
 
             train_set = None
@@ -106,7 +104,7 @@ class DataIngestion:
 
     def initiate_data_ingestion(self):
         try:
-            raw_file_path = self.download_data()
+            raw_file_path = self.get_data_from_mongo_DB()
             return self.split_data_as_train_test()
         except Exception as e:
             raise ApplicationException(e, sys)from e

@@ -1,0 +1,22 @@
+[2023-05-14 12:21:20,779] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='D:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact')
+[2023-05-14 12:21:20,779] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='D:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-21-19\\raw_data', ingested_train_dir='D:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-21-19\\ingested_data\\train', ingested_test_dir='D:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-21-19\\ingested_data\\test')
+[2023-05-14 12:21:20,780] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-14 12:21:20,780] root - INFO - Downloading file from Mongo DB into :[D:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-21-19\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:21:50,886] root - ERROR - 
+        Error occured in script: [D:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [87] 
+        error message: [
+        Error occured in script: [D:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [36] 
+        error message: [
+        Error occured in script: [D:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\components\data_ingestion.py] at 
+        line number: [107] 
+        error message: [
+        Error occured in script: [D:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\components\data_ingestion.py] at 
+        line number: [46] 
+        error message: [
+        Error occured in script: [D:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\data_access\Mongo_Data.py] at 
+        line number: [55] 
+        error message: [localhost:27017: [WinError 10061] No connection could be made because the target machine actively refused it, Timeout: 30s, Topology Description: <TopologyDescription id: 646084e83778ea64008b4449, topology_type: Unknown, servers: [<ServerDescription ('localhost', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('localhost:27017: [WinError 10061] No connection could be made because the target machine actively refused it')>]>]]]]]

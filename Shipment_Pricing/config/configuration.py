@@ -48,6 +48,7 @@ class Configuration:
                 ingested_data_dir,
                 data_ingestion_info[DATA_INGESTION_TEST_DIR_KEY]
             )
+            
 
             data_ingestion_config=DataIngestionConfig(
                 dataset_download_url=dataset_download_url,

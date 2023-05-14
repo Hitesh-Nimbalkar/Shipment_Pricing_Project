@@ -48,7 +48,9 @@ class IngestedDataValidation:
         try:
             df = pd.read_csv(self.validate_path)
             df_column_names = df.columns
+            logging.info(f"Column Names {df_column_names}")
             schema_column_names = list(self.data['ColumnNames'].keys())
+            logging.info(f"Schema colum Data {schema_column_names}")
             
 
             return True if (collections.Counter(df_column_names) == collections.Counter(schema_column_names)) else False

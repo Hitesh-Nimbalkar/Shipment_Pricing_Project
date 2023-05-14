@@ -38,7 +38,7 @@ ColumnNames:
   Line_Item_Insurance_(USD): float64
 
 
-target_column: Freight_Cost_(USD)
+target_column: Freight_Cost_USD_Clean
 
 date_columns:
   - PQ_First_Sent_to_Client_Date
@@ -48,11 +48,11 @@ date_columns:
   - Delivery_Recorded_Date
 
 numerical_columns:
-  - Weight_Kilograms_Clean
-  - Unit_of_Measure_(Per_Pack)
-  - Line_Item_Quantity
   - Pack_Price
   - Unit_Price
+  - Weight_Kilograms_Clean
+  - Line_Item_Quantity
+
 
 string_columns:
 - Item_Description
@@ -61,32 +61,16 @@ string_columns:
 - Manufacturing_Site
   
 categorical_columns:
-  - shipment_mode_encoded
-  - manufacturing_site_encoded
-  - country_encoded
-  - Dosage_Form_encoded
-  - First_Line_Designation_encoded
-  - fulfill_via_encoded
-  - Sub_Classification_encoded
-  - brand_encoded
+- Fulfill_Via 
+- Shipment_Mode
+- Country
+- Brand
+- Sub_Classification
+- First_Line_Designation
+
+                              
 
 
-Columns_remaining :
-  Country: category 
-  Fulfill_Via: category
-  Shipment_Mode: category
-  Product_Group: category
-  Sub_Classification: category
-  Vendor: category
-  Brand: category
-  Dosage_Form: category
-  Unit_of_Measure_(Per_Pack): Float64
-  Line_Item_Quantity: Float64
-  Pack_Price: Float64
-  Unit_Price: Float64
-  First_Line_Designation: category
-  Freight_Cost_USD_Clean: Float64
-  Weight_Kilograms_Clean: Float64
- 
+
 
 

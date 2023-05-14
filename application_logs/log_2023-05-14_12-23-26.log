@@ -1,0 +1,33 @@
+[2023-05-14 12:23:28,285] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact')
+[2023-05-14 12:23:28,286] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-23-26\\raw_data', ingested_train_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-23-26\\ingested_data\\train', ingested_test_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-23-26\\ingested_data\\test')
+[2023-05-14 12:23:28,286] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-14 12:23:28,286] root - INFO - Downloading file from Mongo DB into :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-23-26\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:23:28,551] root - INFO - File :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-23-26\raw_data\SCMS_Delivery_History_Dataset.csv] has been downloaded successfully.
+[2023-05-14 12:23:28,552] root - INFO - Reading csv file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-23-26\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:23:28,599] root - INFO - Splitting data into train and test
+[2023-05-14 12:23:28,603] root - INFO - Exporting training dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-23-26\ingested_data\train\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:23:28,687] root - INFO - Exporting test dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-14-12-23-26\ingested_data\test\SCMS_Delivery_History_Dataset.csv]
+[2023-05-14 12:23:28,708] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-23-26\\ingested_data\\train\\SCMS_Delivery_History_Dataset.csv', test_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-14-12-23-26\\ingested_data\\test\\SCMS_Delivery_History_Dataset.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-05-14 12:23:28,709] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-14 12:23:28,715] root - INFO - Validation Process Started
+[2023-05-14 12:23:28,909] root - INFO - Train_set status|is Train filename validated?: True|is train column name validated?: False|whole missing columns?True
+[2023-05-14 12:23:28,909] root - INFO - Test_set status|is Test filename validated?: True|is test column names validated? False| whole missing columns? True
+[2023-05-14 12:23:28,909] root - INFO - Check yout Training Data! Validation Failed
+[2023-05-14 12:23:28,909] root - ERROR - 
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [88] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [45] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\components\data_validation.py] at 
+        line number: [112] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\components\data_validation.py] at 
+        line number: [87] 
+        error message: [Check your Training data! Validation failed]]]]
+[2023-05-14 12:23:28,910] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log completed.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
