@@ -52,6 +52,7 @@ NUMERICAL_COLUMN_KEY = "numerical_columns"
 CATEGORICAL_COLUMN_KEY = "categorical_columns"
 STRING_COLUMN_KEY="string_columns"
 TARGET_COLUMN_KEY = "target_column"
+DROP_COLUMN_KEY ='drop_columns'
 
 
 

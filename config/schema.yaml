@@ -38,35 +38,50 @@ ColumnNames:
   Line_Item_Insurance_(USD): float64
 
 
-target_column: Freight_Cost_USD_Clean
+target_column: 
+  - Freight_Cost_USD_Clean
 
-date_columns:
-  - PQ_First_Sent_to_Client_Date
-  - PO_Sent_to_Vendor_Date
-  - Scheduled_Delivery_Date
-  - Delivered_to_Client_Date
-  - Delivery_Recorded_Date
 
 numerical_columns:
   - Pack_Price
   - Unit_Price
   - Weight_Kilograms_Clean
   - Line_Item_Quantity
-
-
-string_columns:
-- Item_Description
-- Molecule/Test_Type
-- Dosage 
-- Manufacturing_Site
   
 categorical_columns:
-- Fulfill_Via 
-- Shipment_Mode
-- Country
-- Brand
-- Sub_Classification
-- First_Line_Designation
+  - Fulfill_Via 
+  - Shipment_Mode
+  - Country
+  - Brand
+  - Sub_Classification
+  - First_Line_Designation
+
+drop_columns:
+  - ID
+  - Project_Code
+  - PQ
+  - PO/SO
+  - ASN/DN
+  - Managed_By
+  - Vendor_INCO_Term
+  - PQ_First_Sent_to_Client_Date
+  - PO_Sent_to_Vendor_Date
+  - Scheduled_Delivery_Date
+  - Delivered_to_Client_Date
+  - Delivery_Recorded_Date
+  - Product_Group
+  - Line_Item_Value
+  - Vendor
+  - Item_Description
+  - Molecule/Test_Type
+  - Dosage
+  - Weight_(Kilograms)
+  - Freight_Cost_(USD)
+  - Line_Item_Insurance_(USD)
+  - Manufacturing_Site
+  - Unit_of_Measure_(Per_Pack)
+  - Dosage_Form
+
 
                               
 
