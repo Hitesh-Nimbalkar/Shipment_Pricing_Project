@@ -1,0 +1,22 @@
+[2023-05-15 18:26:49,907] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact')
+[2023-05-15 18:26:49,907] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-26-48\\raw_data', ingested_train_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-26-48\\ingested_data\\train', ingested_test_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-26-48\\ingested_data\\test')
+[2023-05-15 18:26:49,909] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-15 18:26:49,909] root - INFO - Downloading file from Mongo DB into :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-26-48\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:26:50,215] root - INFO - File :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-26-48\raw_data\SCMS_Delivery_History_Dataset.csv] has been downloaded successfully.
+[2023-05-15 18:26:50,215] root - INFO - Reading csv file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-26-48\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:26:50,275] root - INFO - Splitting data into train and test
+[2023-05-15 18:26:50,288] root - INFO - Exporting training dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-26-48\ingested_data\train\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:26:50,398] root - INFO - Exporting test dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-26-48\ingested_data\test\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:26:50,427] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-26-48\\ingested_data\\train\\SCMS_Delivery_History_Dataset.csv', test_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-26-48\\ingested_data\\test\\SCMS_Delivery_History_Dataset.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-05-15 18:26:50,429] root - ERROR - 
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [88] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [43] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\config\configuration.py] at 
+        line number: [89] 
+        error message: [DataValidationConfig.__new__() got an unexpected keyword argument 'validated_train_data']]]

@@ -11,7 +11,12 @@ data_ingestion_config:
 
 data_validation_config:
   schema_dir: config
-  schema_file_name: schema.yaml
+  schema_file_name: schema.yaml 
+  Train_data: Train_data
+  Test_data: Test_data
+
+  
+
 
 data_transformation_config:
   transformed_dir: transformed_data

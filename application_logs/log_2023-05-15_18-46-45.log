@@ -1,0 +1,33 @@
+[2023-05-15 18:46:47,751] root - INFO - Training pipleine config: TrainingPipelineConfig(artifact_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact')
+[2023-05-15 18:46:47,751] root - INFO - Data Ingestion config: DataIngestionConfig(dataset_download_url='https://raw.githubusercontent.com/Hitesh-Nimbalkar/Shipment_Pricing_EDA/main/SCMS_Delivery_History_Dataset.csv', raw_data_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-46-45\\raw_data', ingested_train_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-46-45\\ingested_data\\train', ingested_test_dir='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-46-45\\ingested_data\\test')
+[2023-05-15 18:46:47,751] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Ingestion log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-15 18:46:47,752] root - INFO - Downloading file from Mongo DB into :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-46-45\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:46:48,068] root - INFO - File :[E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-46-45\raw_data\SCMS_Delivery_History_Dataset.csv] has been downloaded successfully.
+[2023-05-15 18:46:48,068] root - INFO - Reading csv file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-46-45\raw_data\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:46:48,120] root - INFO - Splitting data into train and test
+[2023-05-15 18:46:48,124] root - INFO - Exporting training dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-46-45\ingested_data\train\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:46:48,219] root - INFO - Exporting test dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_ingestion\2023-05-15-18-46-45\ingested_data\test\SCMS_Delivery_History_Dataset.csv]
+[2023-05-15 18:46:48,245] root - INFO - Data Ingestion artifact:[DataIngestionArtifact(train_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-46-45\\ingested_data\\train\\SCMS_Delivery_History_Dataset.csv', test_file_path='E:\\Ineuron may batch projects\\Projects\\Shipment_Pricing_Project\\shipment\\artifact\\data_ingestion\\2023-05-15-18-46-45\\ingested_data\\test\\SCMS_Delivery_History_Dataset.csv', is_ingested=True, message='Data ingestion completed successfully.')]
+[2023-05-15 18:46:48,246] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+[2023-05-15 18:46:48,253] root - INFO - Validation Process Started
+[2023-05-15 18:46:48,461] root - INFO - Train_set status|is Train filename validated?: True|is train column name validated?: True|whole missing columns?True
+[2023-05-15 18:46:48,461] root - INFO - Test_set status|is Test filename validated?: True|is test column names validated? True| whole missing columns? True
+[2023-05-15 18:46:48,465] root - INFO - Exported validated train dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_validation\2023-05-15-18-46-45\validated_data\Train_data]
+[2023-05-15 18:46:48,465] root - INFO - Exporting validated train dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_validation\2023-05-15-18-46-45\validated_data\Train_data]
+[2023-05-15 18:46:48,465] root - INFO - Exported validated train dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_validation\2023-05-15-18-46-45\validated_data\Test_data]
+[2023-05-15 18:46:48,466] root - INFO - Exporting validated train dataset to file: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\shipment\artifact\data_validation\2023-05-15-18-46-45\validated_data\Test_data]
+[2023-05-15 18:46:48,466] root - ERROR - 
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [88] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\pipeline\pipeline.py] at 
+        line number: [45] 
+        error message: [
+        Error occured in script: [E:\Ineuron may batch projects\Projects\Shipment_Pricing_Project\Shipment_Pricing\components\data_validation.py] at 
+        line number: [141] 
+        error message: [cannot unpack non-iterable bool object]]]
+[2023-05-15 18:46:48,467] root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Validation log completed.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

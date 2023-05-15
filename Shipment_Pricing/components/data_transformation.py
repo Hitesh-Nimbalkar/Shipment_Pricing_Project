@@ -450,9 +450,11 @@ class DataTransformation:
         try:
             
             logging.info(f"Obtaining training and test file path.")
-            train_file_path = self.data_ingestion_artifact.train_file_path
-            test_file_path = self.data_ingestion_artifact.test_file_path
-
+            train_file_path = self.data_validation_artifact.validated_train_path
+            test_file_path = self.data_validation_artifact.validated_test_path
+            
+            print(train_file_path)
+            print(test_file_path)
             logging.info(f"Loading training and test data as pandas dataframe.")
             train_df = pd.read_csv(train_file_path)
             test_df = pd.read_csv(test_file_path)

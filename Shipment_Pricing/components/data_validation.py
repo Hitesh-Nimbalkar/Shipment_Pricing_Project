@@ -8,6 +8,8 @@ from Shipment_Pricing.exception import ApplicationException
 from Shipment_Pricing.logger import logging
 from Shipment_Pricing.utils.utils import read_yaml_file
 from Shipment_Pricing.entity.raw_data_validation import IngestedDataValidation
+import shutil
+from Shipment_Pricing.constant import *
 
 class DataValidation:
     def __init__(self,data_validation_config:DataValidationConfig,
@@ -22,6 +24,12 @@ class DataValidation:
             self.test_data = IngestedDataValidation(
                 validate_path=self.data_ingestion_artifact.test_file_path, schema_path=self.schema_path)
             
+            self.train_path = self.data_ingestion_artifact.train_file_path
+            self.test_path = self.data_ingestion_artifact.test_file_path
+            
+            self.validated_train_path = self.data_validation_config.validated_train_path
+            self.validated_test_path =self.data_validation_config.validated_test_path
+            
         
         except Exception as e:
             raise ApplicationException(e,sys) from e
@@ -33,8 +41,8 @@ class DataValidation:
              # True means avaliable false means not avaliable
              
             isfolder_available = False
-            train_path = self.data_ingestion_artifact.train_file_path
-            test_path = self.data_ingestion_artifact.test_file_path
+            train_path = self.train_path
+            test_path = self.test_path
             if os.path.exists(train_path):
                 if os.path.exists(test_path):
                     isfolder_available = True
@@ -74,6 +82,9 @@ class DataValidation:
 
                 self.test_data.replace_null_values_with_null()
                 
+                
+
+                
 
                 logging.info(
                     f"Train_set status|is Train filename validated?: {is_train_filename_validated}|is train column name validated?: {is_train_column_name_same}|whole missing columns?{is_train_missing_values_whole_column}")
@@ -81,25 +92,38 @@ class DataValidation:
                     f"Test_set status|is Test filename validated?: {is_test_filename_validated}|is test column names validated? {is_test_column_name_same}| whole missing columns? {is_test_missing_values_whole_column}")
 
                 if is_train_filename_validated  & is_train_column_name_same & is_train_missing_values_whole_column:
-                    pass
+                    ## Exporting Train.csv file 
+                    # Create the directory if it doesn't exist
+                    os.makedirs(self.validated_train_path, exist_ok=True)
+
+                    # Copy the CSV file to the validated train path
+                    shutil.copy(self.train_path, self.validated_train_path)
+                    self.validated_train_path=os.path.join(self.validated_train_path,FILE_NAME)
+                    # Log the export of the validated train dataset
+                    logging.info(f"Exported validated train dataset to file: [{self.validated_train_path}]")
+                                     
+                                     
+                                        
+                    ## Exporting test.csv file
+                    os.makedirs(self.validated_test_path, exist_ok=True)
+                    logging.info(f"Exporting validated train dataset to file: [{self.validated_train_path}]")
+                    os.makedirs(self.validated_test_path, exist_ok=True)
+                    # Copy the CSV file to the validated train path
+                    shutil.copy(self.test_path, self.validated_test_path)
+                    self.validated_test_path=os.path.join(self.validated_test_path,FILE_NAME)
+                    # Log the export of the validated train dataset
+                    logging.info(f"Exported validated train dataset to file: [{self.validated_test_path}]")
+                                        
+                    
+                    return validation_status,self.validated_train_path,self.validated_test_path
                 else:
                     validation_status = False
                     logging.info("Check yout Training Data! Validation Failed")
                     raise ValueError(
                         "Check your Training data! Validation failed")
+                
 
-                if is_test_filename_validated  & is_test_column_name_same & is_test_missing_values_whole_column:
-                    pass
-                else:
-                    validation_status = False
-                    logging.info("Check your Test data! Validation failed")
-                    raise ValueError(
-                        "Check your Testing data! Validation failed")
-
-                logging.info("Validation Process Completed")
-
-                return validation_status
-
+            return validation_status,"NONE","NONE"
         except Exception as e:
             raise ApplicationException(e, sys) from e      
         
@@ -109,16 +133,21 @@ class DataValidation:
 
     def initiate_data_validation(self):
         try:
+            is_validated, validated_train_path, validated_test_path = self.is_Validation_successfull()
+
             data_validation_artifact = DataValidationArtifact(
-                schema_file_path=self.schema_path, is_validated=self.is_Validation_successfull(),
-                message="Data validation performed"
+                schema_file_path=self.schema_path,
+                is_validated=is_validated,
+                message="Data validation performed",
+                validated_train_path=validated_train_path,
+                validated_test_path=validated_test_path
             )
-            logging.info(
-                f"Data validation artifact: {data_validation_artifact}")
+            logging.info(f"Data validation artifact: {data_validation_artifact}")
             return data_validation_artifact
 
         except Exception as e:
             raise ApplicationException(e, sys) from e
+
 
     def __del__(self):
         logging.info(f"{'>>' * 30}Data Validation log completed.{'<<' * 30}")

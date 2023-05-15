@@ -71,6 +71,12 @@ class Configuration:
                 self.time_stamp
             )
             data_validation_config = self.config_info[DATA_VALIDATION_CONFIG_KEY]
+            
+            validated_path=os.path.join(data_validation_artifact_dir,DATA_VALIDATION_VALID_DATASET)
+            
+            validated_train_path=os.path.join(data_validation_artifact_dir,validated_path,DATA_VALIDATION_TRAIN_FILE)
+            
+            validated_test_path=os.path.join(data_validation_artifact_dir,validated_path,DATA_VALIDATION_TEST_FILE)
 
 
             schema_file_path = os.path.join(
@@ -81,7 +87,7 @@ class Configuration:
             
 
             data_validation_config = DataValidationConfig(
-                schema_file_path=schema_file_path
+                schema_file_path=schema_file_path,validated_train_path=validated_train_path,validated_test_path=validated_test_path
             )
             return data_validation_config
         except Exception as e:

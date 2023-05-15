@@ -75,7 +75,6 @@ def predict_price(preprocessed_input):
     # Return the predicted shipment price
     return predicted_price[0]
 
-
 def predict_price_from_input():
     # Get input from the user
     pack_price = float(input("Enter the pack price: "))
