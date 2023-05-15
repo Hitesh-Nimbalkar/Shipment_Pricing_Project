@@ -46,7 +46,7 @@
 [2023-05-15 19:06:20,223] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
 [2023-05-15 19:06:20,223] root - INFO - Outlier Detection
 [2023-05-15 19:06:20,245] root - INFO - Outlier Detection Complete
-[2023-05-15 19:06:20,246] root - INFO - Unique values of Country: ["Côte d'Ivoire" 'Congo, DRC' 'Zambia' 'Mozambique' 'Haiti' 'Ghana'
+[2023-05-15 19:06:20,246] root - INFO - Unique values of Country: ["Cï¿½te d'Ivoire" 'Congo, DRC' 'Zambia' 'Mozambique' 'Haiti' 'Ghana'
  'Tanzania' 'Rwanda' 'Ethiopia' 'Zimbabwe' 'Vietnam' 'Nigeria' 'Kenya'
  'South Africa' 'Uganda' 'South Sudan' 'Sudan' 'Others' 'Guyana'
  'Cameroon' 'Dominican Republic' 'Burundi' 'Namibia' 'Botswana']
@@ -74,7 +74,7 @@
 [2023-05-15 19:06:20,248] root - INFO - 
 
 [2023-05-15 19:06:20,248] root - INFO - Number of unique values of First_Line_Designation: 2
-[2023-05-15 19:06:20,248] root - INFO - Mapping for Country: {"Côte d'Ivoire": 0, 'Congo, DRC': 1, 'Zambia': 2, 'Mozambique': 3, 'Haiti': 4, 'Ghana': 5, 'Tanzania': 6, 'Rwanda': 7, 'Ethiopia': 8, 'Zimbabwe': 9, 'Vietnam': 10, 'Nigeria': 11, 'Kenya': 12, 'South Africa': 13, 'Uganda': 14, 'South Sudan': 15, 'Sudan': 16, 'Others': 17, 'Guyana': 18, 'Cameroon': 19, 'Dominican Republic': 20, 'Burundi': 21, 'Namibia': 22, 'Botswana': 23}
+[2023-05-15 19:06:20,248] root - INFO - Mapping for Country: {"Cï¿½te d'Ivoire": 0, 'Congo, DRC': 1, 'Zambia': 2, 'Mozambique': 3, 'Haiti': 4, 'Ghana': 5, 'Tanzania': 6, 'Rwanda': 7, 'Ethiopia': 8, 'Zimbabwe': 9, 'Vietnam': 10, 'Nigeria': 11, 'Kenya': 12, 'South Africa': 13, 'Uganda': 14, 'South Sudan': 15, 'Sudan': 16, 'Others': 17, 'Guyana': 18, 'Cameroon': 19, 'Dominican Republic': 20, 'Burundi': 21, 'Namibia': 22, 'Botswana': 23}
 [2023-05-15 19:06:20,248] root - INFO - Mapping for Fulfill_Via: {'From RDC': 0, 'Direct Drop': 1}
 [2023-05-15 19:06:20,249] root - INFO - Mapping for Shipment_Mode: {'Truck': 0, 'Air': 1, 'Ocean': 2, 'Air Charter': 3}
 [2023-05-15 19:06:20,249] root - INFO - Mapping for Sub_Classification: {'Pediatric': 0, 'Adult': 1, 'HIV test': 2, 'HIV test - Ancillary': 3, 'ACT': 4, 'Malaria': 5}
@@ -89,7 +89,7 @@
 [2023-05-15 19:06:21,278] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
 [2023-05-15 19:06:21,278] root - INFO - Outlier Detection
 [2023-05-15 19:06:21,303] root - INFO - Outlier Detection Complete
-[2023-05-15 19:06:21,303] root - INFO - Unique values of Country: ['Zambia' 'Ethiopia' 'Nigeria' 'Tanzania' "Côte d'Ivoire" 'Mozambique'
+[2023-05-15 19:06:21,303] root - INFO - Unique values of Country: ['Zambia' 'Ethiopia' 'Nigeria' 'Tanzania' "Cï¿½te d'Ivoire" 'Mozambique'
  'Others' 'Zimbabwe' 'South Africa' 'Rwanda' 'Haiti' 'Vietnam' 'Uganda']
 [2023-05-15 19:06:21,304] root - INFO - 
 
@@ -114,7 +114,7 @@
 [2023-05-15 19:06:21,305] root - INFO - 
 
 [2023-05-15 19:06:21,305] root - INFO - Number of unique values of First_Line_Designation: 2
-[2023-05-15 19:06:21,305] root - INFO - Mapping for Country: {'Zambia': 0, 'Ethiopia': 1, 'Nigeria': 2, 'Tanzania': 3, "Côte d'Ivoire": 4, 'Mozambique': 5, 'Others': 6, 'Zimbabwe': 7, 'South Africa': 8, 'Rwanda': 9, 'Haiti': 10, 'Vietnam': 11, 'Uganda': 12}
+[2023-05-15 19:06:21,305] root - INFO - Mapping for Country: {'Zambia': 0, 'Ethiopia': 1, 'Nigeria': 2, 'Tanzania': 3, "Cï¿½te d'Ivoire": 4, 'Mozambique': 5, 'Others': 6, 'Zimbabwe': 7, 'South Africa': 8, 'Rwanda': 9, 'Haiti': 10, 'Vietnam': 11, 'Uganda': 12}
 [2023-05-15 19:06:21,305] root - INFO - Mapping for Fulfill_Via: {'From RDC': 0, 'Direct Drop': 1}
 [2023-05-15 19:06:21,305] root - INFO - Mapping for Shipment_Mode: {'Truck': 0, 'Air': 1, 'Air Charter': 2, 'Ocean': 3}
 [2023-05-15 19:06:21,306] root - INFO - Mapping for Sub_Classification: {'Adult': 0, 'Pediatric': 1, 'HIV test': 2, 'HIV test - Ancillary': 3, 'Malaria': 4, 'ACT': 5}
