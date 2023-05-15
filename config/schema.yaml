@@ -84,7 +84,9 @@ drop_columns:
 
 
                               
-
+edited_column_labes :
+- Weight_Kilograms_Clean
+- Freight_Cost_USD_Clean
 
 
 

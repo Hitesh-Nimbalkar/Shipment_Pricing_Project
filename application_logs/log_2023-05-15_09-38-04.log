@@ -1,0 +1,43 @@
+[2023-05-15 09:38:05,206] root - INFO - Loading the saved pipeline
+[2023-05-15 09:38:10,533] root - INFO - Weight and Freight Cost Data Clean Completed
+[2023-05-15 09:38:10,535] root - INFO - Columns Dropped ['ID', 'Project_Code', 'PQ', 'PO/SO', 'ASN/DN', 'Managed_By', 'Vendor_INCO_Term', 'PQ_First_Sent_to_Client_Date', 'PO_Sent_to_Vendor_Date', 'Scheduled_Delivery_Date', 'Delivered_to_Client_Date', 'Delivery_Recorded_Date', 'Product_Group', 'Line_Item_Value', 'Vendor', 'Item_Description', 'Molecule/Test_Type', 'Dosage', 'Weight_(Kilograms)', 'Freight_Cost_(USD)', 'Line_Item_Insurance_(USD)', 'Manufacturing_Site', 'Unit_of_Measure_(Per_Pack)', 'Dosage_Form']
+[2023-05-15 09:38:10,535] root - INFO - Drop Columns Complete
+[2023-05-15 09:38:10,555] root - INFO -  >>>>>>>>>>>>  Columns Modififcation Complete  <<<<<<<<<<
+[2023-05-15 09:38:10,556] root - INFO - Outlier Detection
+[2023-05-15 09:38:10,577] root - INFO - Outlier Detection Complete
+[2023-05-15 09:38:10,578] root - INFO - Unique values of Country: ["Côte d'Ivoire" 'Vietnam' 'Nigeria' 'Tanzania' 'Zambia' 'Rwanda' 'Haiti'
+ 'Ethiopia' 'Guyana' 'Zimbabwe' 'Namibia' 'Botswana' 'Mozambique' 'Kenya'
+ 'Uganda' 'Others' 'Swaziland' 'Cameroon' 'South Sudan' 'Burundi'
+ 'South Africa' 'Congo, DRC' 'Dominican Republic' 'Sudan' 'Ghana']
+[2023-05-15 09:38:10,578] root - INFO - 
+
+[2023-05-15 09:38:10,578] root - INFO - Number of unique values of Country: 25
+[2023-05-15 09:38:10,579] root - INFO - Unique values of Fulfill_Via: ['Direct Drop' 'From RDC']
+[2023-05-15 09:38:10,579] root - INFO - 
+
+[2023-05-15 09:38:10,579] root - INFO - Number of unique values of Fulfill_Via: 2
+[2023-05-15 09:38:10,579] root - INFO - Unique values of Shipment_Mode: ['Air' 'Truck' 'Air Charter' 'Ocean']
+[2023-05-15 09:38:10,579] root - INFO - 
+
+[2023-05-15 09:38:10,579] root - INFO - Number of unique values of Shipment_Mode: 4
+[2023-05-15 09:38:10,579] root - INFO - Unique values of Sub_Classification: ['HIV test' 'Pediatric' 'Adult' 'HIV test - Ancillary' 'ACT' 'Malaria']
+[2023-05-15 09:38:10,579] root - INFO - 
+
+[2023-05-15 09:38:10,579] root - INFO - Number of unique values of Sub_Classification: 6
+[2023-05-15 09:38:10,580] root - INFO - Unique values of Brand: ['Others' 'Generic' 'Determine' 'Uni-Gold' 'Stat-Pak' 'Aluvia' 'Bioline'
+ 'Kaletra' 'Norvir' 'Colloidal Gold' 'Truvada']
+[2023-05-15 09:38:10,580] root - INFO - 
+
+[2023-05-15 09:38:10,580] root - INFO - Number of unique values of Brand: 11
+[2023-05-15 09:38:10,580] root - INFO - Unique values of First_Line_Designation: ['Yes' 'No']
+[2023-05-15 09:38:10,580] root - INFO - 
+
+[2023-05-15 09:38:10,580] root - INFO - Number of unique values of First_Line_Designation: 2
+[2023-05-15 09:38:10,581] root - INFO - Mapping for Country: {"Côte d'Ivoire": 0, 'Vietnam': 1, 'Nigeria': 2, 'Tanzania': 3, 'Zambia': 4, 'Rwanda': 5, 'Haiti': 6, 'Ethiopia': 7, 'Guyana': 8, 'Zimbabwe': 9, 'Namibia': 10, 'Botswana': 11, 'Mozambique': 12, 'Kenya': 13, 'Uganda': 14, 'Others': 15, 'Swaziland': 16, 'Cameroon': 17, 'South Sudan': 18, 'Burundi': 19, 'South Africa': 20, 'Congo, DRC': 21, 'Dominican Republic': 22, 'Sudan': 23, 'Ghana': 24}
+[2023-05-15 09:38:10,581] root - INFO - Mapping for Fulfill_Via: {'Direct Drop': 0, 'From RDC': 1}
+[2023-05-15 09:38:10,582] root - INFO - Mapping for Shipment_Mode: {'Air': 0, 'Truck': 1, 'Air Charter': 2, 'Ocean': 3}
+[2023-05-15 09:38:10,582] root - INFO - Mapping for Sub_Classification: {'HIV test': 0, 'Pediatric': 1, 'Adult': 2, 'HIV test - Ancillary': 3, 'ACT': 4, 'Malaria': 5}
+[2023-05-15 09:38:10,583] root - INFO - Mapping for Brand: {'Others': 0, 'Generic': 1, 'Determine': 2, 'Uni-Gold': 3, 'Stat-Pak': 4, 'Aluvia': 5, 'Bioline': 6, 'Kaletra': 7, 'Norvir': 8, 'Colloidal Gold': 9, 'Truvada': 10}
+[2023-05-15 09:38:10,583] root - INFO - Mapping for First_Line_Designation: {'Yes': 0, 'No': 1}
+[2023-05-15 09:38:10,588] root - INFO - Data Modified  Completed and Saved 
+[2023-05-15 09:38:10,588] root - INFO - New Column Order ['Pack_Price', 'Unit_Price', 'Weight_Kilograms_Clean', 'Line_Item_Quantity', 'Fulfill_Via', 'Shipment_Mode', 'Country', 'Brand', 'Sub_Classification', 'First_Line_Designation', 'Freight_Cost_USD_Clean']
