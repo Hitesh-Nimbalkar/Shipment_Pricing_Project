@@ -25,7 +25,6 @@ class batch_prediction:
         self.transformer_file_path = transformer_file_path
         self.feature_engineering_file_path = feature_engineering_file_path
         
-        pass
     
     def start_batch_prediction(self):
         try:

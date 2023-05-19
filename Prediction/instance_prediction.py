@@ -42,8 +42,18 @@ FIRST_LINE_DESIGNATION_MAP = {'Yes': 0, 'No': 1}
 
 
 class instance_prediction_class:
-    def __init__(self) -> None:
-        pass
+    def __init__(self,pack_price, unit_price, weight_kg, line_item_quantity, fulfill_via, shipment_mode, country, brand, sub_classification, first_line_designation) -> None:
+        self.pack_price = pack_price
+        self.unit_price = unit_price
+        self.weight_kg = weight_kg
+        self.line_item_quantity = line_item_quantity
+        self.fulfill_via = fulfill_via
+        self.shipment_mode = shipment_mode
+        self.country = country
+        self.brand = brand
+        self.sub_classification = sub_classification
+        self.first_line_designation = first_line_designation
+        
     
     def preprocess_input(self,pack_price, unit_price, weight_kg, line_item_quantity, fulfill_via, shipment_mode, country, brand, sub_classification, first_line_designation):
         # Convert categorical variables to numerical format
@@ -72,30 +82,23 @@ class instance_prediction_class:
         preprocessed_input = preprocessor.transform(user_input)
 
         # Return the preprocessed input as a numpy array
-        return preprocessed_input.toarray()
+        return preprocessed_input
 
-    def predict_price(preprocessed_input):
+    def predict_price(self,preprocessed_input):
         # Make a prediction using the pre-trained model
         predicted_price = model.predict(preprocessed_input)
+        
 
         # Return the predicted shipment price
         return predicted_price[0]
 
     def predict_price_from_input(self):
-        # Get input from the user
-        pack_price = float(input("Enter the pack price: "))
-        unit_price = float(input("Enter the unit price: "))
-        weight_kg = float(input("Enter the weight in kilograms: "))
-        line_item_quantity = int(input("Enter the line item quantity: "))
-        fulfill_via = input("Enter the fulfill via (From RDC/Direct Drop): ")
-        shipment_mode = input("Enter the shipment mode (Truck/Air/Air Charter/Ocean): ")
-        country = input("Enter the country (Zambia/Ethiopia/Nigeria/Tanzania/Côte d'Ivoire/Mozambique/Others/Zimbabwe/South Africa/Rwanda/Haiti/Vietnam/Uganda): ")
-        brand = input("Enter the brand (Generic/Others/Determine/Uni-Gold): ")
-        sub_classification = input("Enter the sub-classification (Adult/Pediatric/HIV test/HIV test - Ancillary/Malaria/ACT): ")
-        first_line_designation = input("Enter the first line designation (Yes/No): ")
+        
+
 
         # Preprocess the input using the preprocessor
-        preprocessed_input = self.preprocess_input(pack_price, unit_price, weight_kg, line_item_quantity, fulfill_via, shipment_mode, country, brand, sub_classification, first_line_designation)
+        preprocessed_input = self.preprocess_input(self.pack_price,self.unit_price, self.weight_kg, self.line_item_quantity, self.fulfill_via, self.shipment_mode, 
+                                                   self.country, self.brand, self.sub_classification, self.first_line_designation)
 
         # Make a prediction using the pre-trained model
         predicted_price = self.predict_price(preprocessed_input)
