@@ -97,6 +97,24 @@
             color: #333333;
             cursor: pointer;
           }
+
+          .output-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .output-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -203,11 +221,13 @@
         </div>
     </div>
 
-    {% if prediction_result %}
-        <h2 style="text-align: center;">Batch Prediction Result: {{ prediction_result }}</h2>
-    {% endif %}
-    {% if predicted_price %}
-        <h2 style="text-align: center;">Instance Prediction Result: {{ predicted_price }}</h2>
-    {% endif %}
+    <div class="output-container">
+        {% if prediction_result %}
+            <h2 style="text-align: center;">Batch Prediction Result: {{ prediction_result }}</h2>
+        {% endif %}
+        {% if predicted_price %}
+            <h2 style="text-align: center;">Instance Prediction Result: {{ predicted_price }}</h2>
+        {% endif %}
+    </div>
 </body>
 </html>
