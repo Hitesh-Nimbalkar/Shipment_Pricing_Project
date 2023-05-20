@@ -27,30 +27,28 @@ def home():
 
 @app.route("/batch", methods=["POST"])
 def perform_batch_prediction():
-    # Check if a file is uploaded
-    if 'csv_file' not in request.files:  # Update the key to 'csv_file'
-        return render_template('index.html', prediction_type='batch', error='No file uploaded')
 
     file = request.files['csv_file']  # Update the key to 'csv_file'
     # Check if the file has a valid extension
     if file and '.' in file.filename and file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
         # Delete all files in the file path
-        for filename in os.listdir(os.path.join(ROOT_DIR, UPLOAD_FOLDER)):
-            file_path = os.path.join(ROOT_DIR, UPLOAD_FOLDER, filename)
+        for filename in os.listdir(os.path.join(UPLOAD_FOLDER)):
+            file_path = os.path.join(UPLOAD_FOLDER , filename)
             if os.path.isfile(file_path):
                 os.remove(file_path)
 
         # Save the new file to the uploads directory
         filename = secure_filename(file.filename)
-        file_path = os.path.join(ROOT_DIR, UPLOAD_FOLDER, filename)
+        file_path = os.path.join(UPLOAD_FOLDER, filename)
         file.save(file_path)
         print(file_path)
-
 
         # Perform batch prediction using the uploaded file
         batch = batch_prediction(file_path, model_file_path, transformer_file_path, feature_engineering_file_path)
         batch.start_batch_prediction()
-        output = "Batch Prediction Done Done DONE"
+
+
+        output = "Batch Prediction Done"
         return render_template("index.html", prediction_result=output, prediction_type='batch')
     else:
         return render_template('index.html', prediction_type='batch', error='Invalid file type')

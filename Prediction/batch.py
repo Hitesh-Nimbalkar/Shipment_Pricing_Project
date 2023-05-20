@@ -86,7 +86,14 @@ class batch_prediction:
             predictions = pipeline.predict(df)
 
             # Save the predictions to a file
+            # Check if the prediction CSV file exists
+
             output_file_path = os.path.join(BATCH_PREDICTION, "predictions.csv")
+            if os.path.exists(output_file_path):
+                logging.info("Found Files in prediction folder ..")
+                logging.info("Deleting the found Files")
+                # Delete the existing file
+                os.remove(output_file_path)
             pd.DataFrame(predictions, columns=[target_features]).to_csv(output_file_path, index=False)
 
             logging.info(f"Batch prediction completed successfully. Predictions saved to: {output_file_path}")
