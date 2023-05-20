@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
 from Prediction.batch import batch_prediction
 from Prediction.instance_prediction import instance_prediction_class
-
+from werkzeug.utils import secure_filename
+import os
+from Shipment_Pricing.constant import * 
 input_file_path = "SCMS_Delivery_History_Dataset.csv"
 feature_engineering_file_path = "prediction_files/feat_eng.pkl"
 transformer_file_path = "prediction_files/preprocessed.pkl"
@@ -14,7 +16,10 @@ SUB_CLASSIFICATION_MAP = {'Adult': 0, 'Pediatric': 1, 'HIV test': 2, 'HIV test -
 BRAND_MAP = {'Generic': 0, 'Others': 1, 'Determine': 2, 'Uni-Gold': 3}
 FIRST_LINE_DESIGNATION_MAP = {'Yes': 0, 'No': 1}
 
+UPLOAD_FOLDER = 'batch_prediction/Uploaded_CSV_FILE'
+
 app = Flask(__name__)
+ALLOWED_EXTENSIONS = {'csv'}
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -22,10 +27,34 @@ def home():
 
 @app.route("/batch", methods=["POST"])
 def perform_batch_prediction():
-    batch = batch_prediction(input_file_path, model_file_path, transformer_file_path, feature_engineering_file_path)
-    batch.start_batch_prediction()
-    output = "Batch Prediction Done Done DONE"
-    return render_template("index.html", prediction_result=output, prediction_type='batch')
+    # Check if a file is uploaded
+    if 'csv_file' not in request.files:  # Update the key to 'csv_file'
+        return render_template('index.html', prediction_type='batch', error='No file uploaded')
+
+    file = request.files['csv_file']  # Update the key to 'csv_file'
+    # Check if the file has a valid extension
+    if file and '.' in file.filename and file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        # Delete all files in the file path
+        for filename in os.listdir(os.path.join(ROOT_DIR, UPLOAD_FOLDER)):
+            file_path = os.path.join(ROOT_DIR, UPLOAD_FOLDER, filename)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+
+        # Save the new file to the uploads directory
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(ROOT_DIR, UPLOAD_FOLDER, filename)
+        file.save(file_path)
+        print(file_path)
+
+
+        # Perform batch prediction using the uploaded file
+        batch = batch_prediction(file_path, model_file_path, transformer_file_path, feature_engineering_file_path)
+        batch.start_batch_prediction()
+        output = "Batch Prediction Done Done DONE"
+        return render_template("index.html", prediction_result=output, prediction_type='batch')
+    else:
+        return render_template('index.html', prediction_type='batch', error='Invalid file type')
+
 
 @app.route("/instance", methods=["POST"])
 def perform_instance_prediction():

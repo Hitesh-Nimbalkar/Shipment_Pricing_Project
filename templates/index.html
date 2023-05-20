@@ -87,17 +87,31 @@
         input[type="submit"]:hover {
             background-color: #555555;
         }
+        input[type="file"] {
+            display: block;
+            margin: auto;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            color: #333333;
+            cursor: pointer;
+          }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Batch Prediction Form -->
         <div class="left-content">
             <div class="prediction-container">
                 <img class="prediction-image" src="/static/images/batch_prediction.png" alt="Batch Prediction">
                 <h1>Batch Prediction</h1>
             </div>
-            <form action="/batch" method="post">
-                <input type="hidden" name="prediction_type" value="batch">
+            <form action="/batch" method="post" enctype="multipart/form-data">
+                <div class="input-label">
+                    <label for="csv_file">Choose CSV file:</label>
+                </div>
+                <input type="file" name="csv_file" accept=".csv" required>
                 <input type="submit" value="Perform Batch Prediction">
             </form>
         </div>
@@ -105,7 +119,7 @@
         <div class="right-content">
             <div class="center">
                 <h1>Instance Prediction</h1>
-                <form action="/instance" method="post">
+                <form action="/instance" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="prediction_type" value="instance">
                     <div class="input-label">
                         <label for="pack_price">Pack Price:</label>

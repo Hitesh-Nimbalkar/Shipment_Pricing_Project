@@ -11,7 +11,7 @@ import sys
 
 
 
-BATCH_PREDICTION = "batch_prediction"
+BATCH_PREDICTION = "batch_prediction\Prediction_files"
 INSTANCE_PREDICTION="Instance_prediction"
 
 
