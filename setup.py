@@ -21,7 +21,7 @@ setup(
     name="Shipment_Pricing",
     version="0.0.2",
     author="Hitesh_Nimbalkar",
-    author_email="animbalkarhitesh@gmail.com",
+    author_email="nimbalkarhitesh@gmail.com",
     packages = find_packages(),
     install_requires=get_requirements(),
 )
