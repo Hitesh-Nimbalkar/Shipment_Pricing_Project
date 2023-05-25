@@ -1,3 +1,22 @@
 yaml
 pandas 
 flask
+dill
+dnspython
+fastapi
+pymongo
+python-dotenv
+types-s3transfer
+uvicorn
+watchfiles
+websockets
+wincertstore
+xgboost
+neuro-mf
+streamlit
+sklearn
+scipy
+numpy
+seaborn
+scikit-learn
+-e .
