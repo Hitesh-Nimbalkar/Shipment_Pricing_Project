@@ -1,9 +1,7 @@
 import sys
 from typing import Optional
 
-import numpy as np
 import pandas as pd
-import json
 from Shipment_Pricing.config.mongo_db_connection import MongoDBClient
 from Shipment_Pricing.constant.database import DATABASE_NAME
 from Shipment_Pricing.exception import ApplicationException
@@ -11,28 +9,27 @@ from Shipment_Pricing.exception import ApplicationException
 
 class mongodata:
     """
-    This class help to export entire mongo db record csv 
+    This class helps to export entire MongoDB records to a CSV file.
     """
 
     def __init__(self):
-        """
-        """
         try:
             self.mongo_client = MongoDBClient(database_name=DATABASE_NAME)
-
         except Exception as e:
             raise ApplicationException(e, sys)
 
 
-    def save_csv_file(self,file_path ,collection_name: str, database_name: Optional[str] = None):
+    def save_csv_file(self, file_path, collection_name: str, database_name: Optional[str] = None):
         try:
-            data_frame=pd.read_csv(file_path)
+            data_frame = pd.read_csv(file_path)
             data_frame.reset_index(drop=True, inplace=True)
-            records = list(json.loads(data_frame.T.to_json()).values())
+            records = data_frame.to_dict(orient='records')
+            
             if database_name is None:
                 collection = self.mongo_client.database[collection_name]
             else:
-                collection = self.mongo_client[database_name][collection_name]
+                collection = self.mongo_client.client[database_name][collection_name]
+
             collection.insert_many(records)
             return len(records)
         except Exception as e:
@@ -52,11 +49,11 @@ class mongodata:
                 collection = self.mongo_client.client[collection_name]
             else:
                 collection = self.mongo_client.client[database_name][collection_name]
+
             df = pd.DataFrame(list(collection.find()))
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"], axis=1)
             csv_string = df.to_csv(index=False)
-            
 
             # Write the CSV string to file
             with open(file_path, 'w', encoding='utf-8') as f:

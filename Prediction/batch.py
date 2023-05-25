@@ -10,12 +10,26 @@ from Shipment_Pricing.entity.artifact_entity import ModelTrainerArtifact,DataTra
 import sys 
 import pymongo
 import json
+from Shipment_Pricing.constant.database import *
 from Shipment_Pricing.constant import *
+import urllib
+import yaml
 
-# Provide the mongodb localhost url to connect python to mongodb.
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+env_file_path = os.path.join(ROOT_DIR, 'env.yaml')
 
+# Load environment variables from env.yaml
+with open(env_file_path) as file:
+    env_vars = yaml.safe_load(file)
+username = env_vars.get('USER_NAME')
+password = env_vars.get('PASS_WORD')
 
+escaped_username = urllib.parse.quote_plus(username)
+escaped_password = urllib.parse.quote_plus(password)
+
+# Use the escaped username and password in the MongoDB connection string
+mongo_db_url = f"mongodb+srv://{username}:{password}@rentalbike.5fi8zs7.mongodb.net/"
+
+client = pymongo.MongoClient(mongo_db_url)
 
 
 
@@ -44,25 +58,25 @@ class batch_prediction:
         print("Data Uploaded")
 
         # Check if the database exists
-        if DATABASE_NAME in client.list_database_names():
-            print(f"The database {DATABASE_NAME} already exists")
+        if DATABASE_NAME1 in client.list_database_names():
+            print(f"The database {DATABASE_NAME1} already exists")
             # Check if the collection exists
-            if COLLECTION_NAME in client[DATABASE_NAME].list_collection_names():
-                print(f"The collection {COLLECTION_NAME} already exists")
+            if COLLECTION_NAME1 in client[DATABASE_NAME1].list_collection_names():
+                print(f"The collection {COLLECTION_NAME1} already exists")
                 # Drop the existing collection
-                client[DATABASE_NAME][COLLECTION_NAME].drop()
-                print(f"The collection {COLLECTION_NAME} is dropped and will be replaced with new data")
+                client[DATABASE_NAME1][COLLECTION_NAME1].drop()
+                print(f"The collection {COLLECTION_NAME1} is dropped and will be replaced with new data")
             else:
-                print(f"The collection {COLLECTION_NAME} does not exist and will be created")
+                print(f"The collection {COLLECTION_NAME1} does not exist and will be created")
         else:
             # Create the database and collection
-            print(f"The database {DATABASE_NAME} does not exist and will be created")
-            db = client[DATABASE_NAME]
+            print(f"The database {DATABASE_NAME1} does not exist and will be created")
+            db = client[DATABASE_NAME1]
             col = db[COLLECTION_NAME]
-            print(f"The collection {COLLECTION_NAME} is created")
+            print(f"The collection {COLLECTION_NAME1} is created")
 
         # Insert converted json record to mongo db
-        client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_record)
+        client[DATABASE_NAME1][COLLECTION_NAME1].insert_many(json_record)
         
         logging.info("Prediction Data Updated to MongoDB")
         

@@ -1,2 +1,5 @@
-DATABASE_NAME = 'Shipment_Pricing'
-COLLECTION_NAME = "Data"
+DATABASE_NAME = 'aps'
+COLLECTION_NAME = "sensor"
+
+DATABASE_NAME1 = 'Shipment_Pricing'
+COLLECTION_NAME1 = "Data"
