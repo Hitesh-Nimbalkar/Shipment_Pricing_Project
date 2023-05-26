@@ -42,10 +42,10 @@ class ModelTrainer:
                 #"Decision Tree": [DecisionTreeRegressor(), {'max_depth': [2, 4, 8, 10, 20, 30, 50, 60],
                                                           #  'min_samples_leaf': [5, 10, 20, 50, 100]}],
                 "Random Forest": [RandomForestRegressor(), {'max_depth': [15, 20, 25, 30, 40],
-                                                             'n_estimators': [100,150,200]}]
+                                                             'n_estimators': [150,200]}],
                 #"XG_Boost": [XGBRegressor(eval_metric='rmsle'),
-                    #         {"max_depth": [12,15,20,25],
-                    #          "n_estimators": [50, 150,200], "learning_rate": [0.05,0.1,0.150,0.2,0.25]}]
+                #            {"max_depth": [12,15,20,25],
+                 #             "n_estimators": [50, 150,200], "learning_rate": [0.05,0.1,0.150,0.2,0.25]}]
             }
         except Exception as e:
             raise ApplicationException(e, sys)

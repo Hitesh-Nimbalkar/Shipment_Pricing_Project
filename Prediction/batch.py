@@ -23,9 +23,6 @@ with open(env_file_path) as file:
 username = env_vars.get('USER_NAME')
 password = env_vars.get('PASS_WORD')
 
-escaped_username = urllib.parse.quote_plus(username)
-escaped_password = urllib.parse.quote_plus(password)
-
 # Use the escaped username and password in the MongoDB connection string
 mongo_db_url = f"mongodb+srv://{username}:{password}@rentalbike.5fi8zs7.mongodb.net/"
 

@@ -66,16 +66,6 @@ class Pipeline():
             return model_trainer.initiate_model_training()
         except Exception as e:
             raise ApplicationException(e,sys) from e  
-    
-    def start_model_evaluation(self,data_ingestion_artifact = DataIngestionArtifact,
-        data_transformation_artifact=DataTransformationArtifact,
-        model_trainer_artifact=ModelTrainerArtifact):
-        try:
-            model_evaluation = ModelEvaluation( )
-            
-        
-        except Exception as e:
-            raise ApplicationException(e,sys) from e 
 
 
 
